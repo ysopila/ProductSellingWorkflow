@@ -61,7 +61,7 @@ namespace ProductSellingWorkflow.Service.Implementations
 		{
 			var product = new Product();
 
-			SetProperties(product, @event);
+			@event.Apply(product, true);
 
 			_unitOfWork.ProductRepository.Insert(product);
 			_unitOfWork.Save();
@@ -71,41 +71,10 @@ namespace ProductSellingWorkflow.Service.Implementations
 		{
 			var product = _unitOfWork.ProductRepository.Find(x => x.Id == @event.Id).FirstOrDefault();
 
-			SetProperties(product, @event);
+			@event.Apply(product, true);
 
 			_unitOfWork.ProductRepository.Update(product);
 			_unitOfWork.Save();
-		}
-
-		private void SetProperties(Product product, ChangeProductEvent @event)
-		{
-			var logs = new List<ProductLog>();
-			var operationId = Guid.NewGuid();
-			var type = product.GetType();
-
-			foreach (var eventProp in @event.Values)
-			{
-				var operation = SetKeys.Contains(eventProp.Key) ? ProductLogOperation.Set : ProductLogOperation.Add;
-
-				var log = new ProductLog
-				{
-					OperationId = operationId,
-					CreatedAt = DateTimeOffset.UtcNow,
-					Property = eventProp.Key,
-					Value = eventProp.Value.ToString(),
-					Operation = operation,
-					Type = @event.Type
-				};
-
-				var prop = type.GetProperty(eventProp.Key);
-
-				if (prop != null)
-				{
-					prop.SetValue(product, eventProp.Value, null);
-				}
-
-				product.ProductLogs.Add(log);
-			}
 		}
 	}
 }

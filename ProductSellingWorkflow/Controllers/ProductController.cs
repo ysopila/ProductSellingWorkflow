@@ -34,7 +34,7 @@ namespace ProductSellingWorkflow.Controllers
 			{
 				var @event = new CreateProductEvent();
 
-				@event.Values = model.ToPropertiesDictionary();
+				@event.Color = model.Color;
 
 				_service.Create(@event);
 
@@ -59,9 +59,9 @@ namespace ProductSellingWorkflow.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var @event = new UpdateProductEvent { Id = model.Id };
+				var @event = new UpdateProductEvent(model.Id);
 
-				@event.Values = model.ToPropertiesDictionary();
+				@event.Color = model.Color;
 
 				_service.Update(@event);
 
