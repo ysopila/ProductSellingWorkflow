@@ -12,6 +12,8 @@ namespace ProductSellingWorkflow.Data.Configuration
 			HasRequired(x => x.Product)
 				.WithMany(x => x.ProductLogs)
 				.HasForeignKey(x => x.ProductId);
+
+			HasIndex(x => x.ProductId);
 		}
 	}
 }
