@@ -1,10 +1,9 @@
 ﻿using ProductSellingWorkflow.Common.Core;
 using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
-using ProductSellingWorkflow.Repository.Models;
+using ProductSellingWorkflow.Data.Views;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
-using ProductSellingWorkflow.Service.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,15 +20,15 @@ namespace ProductSellingWorkflow.Service.Implementations
 			_mapper = mapper;
 		}
 
-		public ProductDTO Get(int id)
+		public ProductView Get(int id)
 		{
 			var product = _unitOfWork.ProductRepository.GetOne(id);
-			return _mapper.Map<ProductModel, ProductDTO>(product);
+			return product;
 		}
 
-		public IEnumerable<ProductDTO> GetAll()
+		public IEnumerable<ProductView> GetAll()
 		{
-			return _unitOfWork.ProductRepository.GetAll().Map(_mapper.GetMapper<ProductModel, ProductDTO>());
+			return _unitOfWork.ProductRepository.GetAll();
 		}
 
 		public EventResult Create(CreateProductEvent @event)
@@ -42,39 +41,26 @@ namespace ProductSellingWorkflow.Service.Implementations
 				_unitOfWork.ProductRepository.Insert(product);
 				_unitOfWork.Save();
 			}
+			else
+			{
+				_unitOfWork.Rollback();
+			}
 			return result;
 		}
 
 		public EventResult Update(UpdateProductEvent @event)
 		{
-			var product = _unitOfWork.ProductRepository.Find(x => x.Id == @event.Id).FirstOrDefault();
+			var product = _unitOfWork.ProductRepository.Find(x => x.Id == @event.Id, noTracking: false).FirstOrDefault();
 
 			var result = @event.Apply(product, true);
 			if (result.Success)
 			{
-				//if (@event.AddedTags != null)
-				//{
-				//	var allTags = _unitOfWork.TagRepository.Find(x => @event.AddedTags.Contains(x.Name));
-
-				//	foreach (var item in @event.AddedTags)
-				//	{
-				//		var tag = allTags.FirstOrDefault(x => x.Name == item) ?? new Tag { Name = item };
-
-				//		product.ProductTags.Add(new ProductTag { Tag = tag });
-				//	}
-				//}
-
-				//if (@event.RemovedTags != null)
-				//{
-				//	foreach (var item in @event.RemovedTags)
-				//	{
-				//		var productTag = product.ProductTags.FirstOrDefault(x => x.Tag.Name == item);
-				//		_unitOfWork.ProductTagRepository.Delete(productTag);
-				//	}
-				//}
-
 				_unitOfWork.ProductRepository.Update(product);
 				_unitOfWork.Save();
+			}
+			else
+			{
+				_unitOfWork.Rollback();
 			}
 			return result;
 		}

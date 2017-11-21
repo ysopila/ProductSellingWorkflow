@@ -7,7 +7,7 @@ namespace ProductSellingWorkflow.Data.Configuration
 	{
 		public ProductTagConfiguration()
 		{
-			HasKey(x => x.Id);
+			HasKey(x => new { x.ProductId, x.TagId });
 		}
 	}
 }

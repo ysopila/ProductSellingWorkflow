@@ -61,7 +61,8 @@ namespace ProductSellingWorkflow.Repository.Implementations
 			Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
 			string includeProperties = "",
 			int? skip = null,
-			int? take = null)
+			int? take = null,
+			bool noTracking = true)
 		{
 			IQueryable<T> query = Query;
 
@@ -78,7 +79,9 @@ namespace ProductSellingWorkflow.Repository.Implementations
 				query = query.Skip(skip.Value);
 			if (take.HasValue)
 				query = query.Take(take.Value);
-			return query.AsNoTracking().ToList();
+			if (noTracking)
+				query = query.AsNoTracking();
+			return query.ToList();
 		}
 	}
 }

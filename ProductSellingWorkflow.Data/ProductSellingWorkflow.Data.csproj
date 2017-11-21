@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201711201622045_Initial.Designer.cs">
       <DependentUpon>201711201622045_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711211828004_ProductTagFix.cs" />
+    <Compile Include="Migrations\201711211828004_ProductTagFix.Designer.cs">
+      <DependentUpon>201711211828004_ProductTagFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,6 +79,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711201622045_Initial.resx">
       <DependentUpon>201711201622045_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711211828004_ProductTagFix.resx">
+      <DependentUpon>201711211828004_ProductTagFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,8 @@ namespace ProductSellingWorkflow.Repository.Abstractions
 			Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
 			string includeProperties = "",
 			int? skip = null,
-			int? take = null);
+			int? take = null,
+			bool noTracking = true);
 		void Insert(T obj);
 		void Update(T obj);
 		void Delete(T obj);

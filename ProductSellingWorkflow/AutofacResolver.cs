@@ -29,6 +29,7 @@ namespace ProductSellingWorkflow
 
 			builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 			builder.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
+			builder.RegisterType<TagService>().As<ITagService>().InstancePerLifetimeScope();
 
 			builder.RegisterType<Mapper>().As<ISimpleMapper>().InstancePerLifetimeScope();
 

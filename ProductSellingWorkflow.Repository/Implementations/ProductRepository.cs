@@ -1,7 +1,7 @@
 ﻿using ProductSellingWorkflow.Data;
 using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
-using ProductSellingWorkflow.Repository.Models;
+using ProductSellingWorkflow.Data.Views;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -14,13 +14,13 @@ namespace ProductSellingWorkflow.Repository.Implementations
 
 		protected override IQueryable<Product> Query
 		{
-			get { return base.Query.Include(x => x.ProductLogs).Include(x => x.ProductTags.Select(s => s.Tag)); }
+			get { return base.Query.Include(x => x.ProductTags); }
 		}
-		public ProductModel GetOne(int id) => ProductSet.Where(x => x.Id == id).FirstOrDefault();
+		public ProductView GetOne(int id) => ProductSet.Where(x => x.Id == id).FirstOrDefault();
 
-		public IEnumerable<ProductModel> GetAll() => ProductSet.ToList();
+		public IEnumerable<ProductView> GetAll() => ProductSet.ToList();
 
-		private IQueryable<ProductModel> ProductSet
+		private IQueryable<ProductView> ProductSet
 		{
 			get
 			{
@@ -37,7 +37,7 @@ namespace ProductSellingWorkflow.Repository.Implementations
 				return
 					from x in Context.Set<Product>()
 					join l in queryLog on x.Id equals l.ProductId
-					select new ProductModel
+					select new ProductView
 					{
 						Id = x.Id,
 						Name = x.Name,

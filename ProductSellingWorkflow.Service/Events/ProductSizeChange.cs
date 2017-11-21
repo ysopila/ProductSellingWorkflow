@@ -15,7 +15,7 @@ namespace ProductSellingWorkflow.Service.Events
 			{
 				product.Size = Value;
 
-				if (createLog) product.ProductLogs.Add(CreateLog("Size", Value));
+				if (createLog) CreateLog(product, "Size", Value);
 			}
 			return result;
 		}

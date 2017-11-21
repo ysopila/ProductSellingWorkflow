@@ -1,6 +1,7 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 using ProductSellingWorkflow.DataModel;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProductSellingWorkflow.Service.Events
 {
@@ -10,8 +11,7 @@ namespace ProductSellingWorkflow.Service.Events
 		private ProductDescriptionChange _description;
 		private ProductColorChange _color;
 		private ProductSizeChange _size;
-		private ProductTagsAdd _tagsAdd;
-		private ProductTagsRemove _tagsRemove;
+		private IEnumerable<ProductTagAdd> _tagsAdd;
 
 		protected override ProductLogType Type => ProductLogType.Create;
 
@@ -24,6 +24,10 @@ namespace ProductSellingWorkflow.Service.Events
 				result += _description?.Apply(product, createLog);
 				result += _color?.Apply(product, createLog);
 				result += _size?.Apply(product, createLog);
+
+				if (_tagsAdd != null)
+					foreach (var t in _tagsAdd)
+						result += t.Apply(product, createLog);
 			}
 			return result;
 		}
@@ -52,16 +56,10 @@ namespace ProductSellingWorkflow.Service.Events
 			set { _size = new ProductSizeChange(value, Type, OperationId); }
 		}
 
-		public IEnumerable<string> AddedTags
+		public IEnumerable<ProductTag> AddedTags
 		{
-			get { return _tagsAdd?.Value; }
-			set { _tagsAdd = new ProductTagsAdd(value, Type, OperationId); }
-		}
-
-		public IEnumerable<string> RemovedTags
-		{
-			get { return _tagsRemove?.Value; }
-			set { _tagsRemove = new ProductTagsRemove(value, Type, OperationId); }
+			get { return _tagsAdd?.Select(x => x.Value); }
+			set { _tagsAdd = value?.Select(x => new ProductTagAdd(x, Type, OperationId)); }
 		}
 	}
 }

@@ -1,10 +1,11 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
-namespace ProductSellingWorkflow.Repository.Models
+namespace ProductSellingWorkflow.Data.Views
 {
-	public class ProductModel
+	public class ProductView
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
@@ -15,5 +16,11 @@ namespace ProductSellingWorkflow.Repository.Models
 		public ProductState State { get; set; }
 		public DateTimeOffset CreatedAt { get; set; }
 		public DateTimeOffset ModifiedAt { get; set; }
+
+		public string[] TagsArray
+		{
+			get { return Tags?.ToArray(); }
+			set { Tags = value; }
+		}
 	}
 }

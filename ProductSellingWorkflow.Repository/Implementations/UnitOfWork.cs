@@ -2,6 +2,8 @@
 using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
 using System;
+using System.Linq;
+using System.Data.Entity;
 
 namespace ProductSellingWorkflow.Repository.Implementations
 {
@@ -48,6 +50,30 @@ namespace ProductSellingWorkflow.Repository.Implementations
 			{
 				_context.Dispose();
 				_context = null;
+			}
+		}
+		public void Rollback()
+		{
+			if (_context == null)
+				return;
+			var changedEntries = _context.ChangeTracker.Entries()
+				.Where(x => x.State != EntityState.Unchanged).ToList();
+
+			foreach (var entry in changedEntries)
+			{
+				switch (entry.State)
+				{
+					case EntityState.Modified:
+						entry.CurrentValues.SetValues(entry.OriginalValues);
+						entry.State = EntityState.Unchanged;
+						break;
+					case EntityState.Added:
+						entry.State = EntityState.Detached;
+						break;
+					case EntityState.Deleted:
+						entry.State = EntityState.Unchanged;
+						break;
+				}
 			}
 		}
 

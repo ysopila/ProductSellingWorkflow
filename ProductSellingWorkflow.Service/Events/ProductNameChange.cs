@@ -15,7 +15,7 @@ namespace ProductSellingWorkflow.Service.Events
 			{
 				product.Name = Value;
 
-				if (createLog) product.ProductLogs.Add(CreateLog("Name", Value));
+				if (createLog) CreateLog(product, "Name", Value);
 			}
 			return result;
 		}

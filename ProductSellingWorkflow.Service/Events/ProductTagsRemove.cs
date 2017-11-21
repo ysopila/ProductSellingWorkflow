@@ -1,13 +1,13 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 using ProductSellingWorkflow.DataModel;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace ProductSellingWorkflow.Service.Events
 {
-	public class ProductTagsRemove : ProductPropertyChange<IEnumerable<string>>
+	public class ProductTagRemove : ProductPropertyChange<ProductTag>
 	{
-		public ProductTagsRemove(IEnumerable<string> value, ProductLogType type, Guid operationId) : base(value, type, operationId) { }
+		public ProductTagRemove(ProductTag value, ProductLogType type, Guid operationId) : base(value, type, operationId) { }
 
 		protected override ProductLogOperation Operation => ProductLogOperation.Remove;
 
@@ -16,7 +16,9 @@ namespace ProductSellingWorkflow.Service.Events
 			var result = base.Apply(product, createLog);
 			if (result.Success)
 			{
-				if (createLog) product.ProductLogs.Add(CreateLog("Tags", string.Join(", ", Value)));
+				product.ProductTags.Remove(product.ProductTags.FirstOrDefault(x => x.TagId == Value.Id));
+
+				if (createLog) CreateLog(product, "Tags", Value.Value);
 			}
 			return result;
 		}

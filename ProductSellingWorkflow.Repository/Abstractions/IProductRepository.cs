@@ -1,12 +1,12 @@
 ﻿using ProductSellingWorkflow.DataModel;
-using ProductSellingWorkflow.Repository.Models;
+using ProductSellingWorkflow.Data.Views;
 using System.Collections.Generic;
 
 namespace ProductSellingWorkflow.Repository.Abstractions
 {
 	public interface IProductRepository : IRepository<Product>
 	{
-		ProductModel GetOne(int id);
-		IEnumerable<ProductModel> GetAll();
+		ProductView GetOne(int id);
+		IEnumerable<ProductView> GetAll();
 	}
 }

@@ -55,13 +55,16 @@
     <Compile Include="Implementations\ProductRepository.cs" />
     <Compile Include="Implementations\Repository.cs" />
     <Compile Include="Implementations\UnitOfWork.cs" />
-    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProductSellingWorkflow.Common\ProductSellingWorkflow.Common.csproj">
       <Project>{f37e962f-2eb4-47c4-9044-ef720fcc8e66}</Project>
       <Name>ProductSellingWorkflow.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductSellingWorkflow.Data.Views\ProductSellingWorkflow.Data.Views.csproj">
+      <Project>{2f02c507-448b-44b1-a276-f8a4b56b4f2b}</Project>
+      <Name>ProductSellingWorkflow.Data.Views</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProductSellingWorkflow.DataModel\ProductSellingWorkflow.DataModel.csproj">
       <Project>{b1c507a3-a578-45f6-be91-e7f3524d952c}</Project>

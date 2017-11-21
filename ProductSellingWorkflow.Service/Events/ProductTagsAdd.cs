@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace ProductSellingWorkflow.Service.Events
 {
-	public class ProductTagsAdd : ProductPropertyChange<IEnumerable<string>>
+	public class ProductTagAdd : ProductPropertyChange<ProductTag>
 	{
-		public ProductTagsAdd(IEnumerable<string> value, ProductLogType type, Guid operationId) : base(value, type, operationId) { }
+		public ProductTagAdd(ProductTag value, ProductLogType type, Guid operationId) : base(value, type, operationId) { }
 
 		protected override ProductLogOperation Operation => ProductLogOperation.Add;
 
@@ -16,7 +16,15 @@ namespace ProductSellingWorkflow.Service.Events
 			var result = base.Apply(product, createLog);
 			if (result.Success)
 			{
-				if (createLog) product.ProductLogs.Add(CreateLog("Tags", string.Join(", ", Value)));
+				var productTag = new DataModel.ProductTag { ProductId = product.Id };
+				if (Value.Id.HasValue)
+					productTag.TagId = Value.Id.Value;
+				else
+					productTag.Tag = new Tag { Name = Value.Value };
+				product.ProductTags.Add(productTag);
+
+				if (createLog)
+					CreateLog(product, "Tags", Value.Value);
 			}
 			return result;
 		}

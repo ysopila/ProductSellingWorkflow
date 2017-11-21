@@ -1,5 +1,7 @@
-﻿using ProductSellingWorkflow.Service.Events;
+﻿using System;
+using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace ProductSellingWorkflow.Models
 {
@@ -12,21 +14,6 @@ namespace ProductSellingWorkflow.Models
 		public string Color { get; set; }
 		public string Tags { get; set; }
 
-		public CreateProductEvent ToCreateProductEvent()
-		{
-			var @event = new CreateProductEvent
-			{
-				Name = Name,
-				Description = Description,
-				Size = Size,
-				Color = Color
-			};
-
-			//var added = Tags.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
-
-			//if (added.Any()) @event.AddedTags = added;
-
-			return @event;
-		}
+		public IEnumerable<string> TagsList => Tags?.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
 	}
 }

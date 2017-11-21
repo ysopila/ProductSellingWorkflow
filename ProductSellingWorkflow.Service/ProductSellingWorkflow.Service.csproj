@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\ITagService.cs" />
     <Compile Include="Abstractions\IProductService.cs" />
     <Compile Include="Events\BuyEvent.cs" />
     <Compile Include="Events\ComplexProductEvent.cs" />
     <Compile Include="Events\CreateProductEvent.cs" />
     <Compile Include="Events\EventResult.cs" />
     <Compile Include="Events\MoveInCatalogEvent.cs" />
+    <Compile Include="Events\ProductTag.cs" />
     <Compile Include="Events\ProductTagsRemove.cs" />
     <Compile Include="Events\ProductTagsAdd.cs" />
     <Compile Include="Events\ProductSizeChange.cs" />
@@ -56,15 +58,21 @@
     <Compile Include="Events\ProductPropertyChange.cs" />
     <Compile Include="Events\ProductStateChange.cs" />
     <Compile Include="Events\UpdateProductEvent.cs" />
+    <Compile Include="Implementations\TagService.cs" />
     <Compile Include="Implementations\ProductService.cs" />
     <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Models\ProductDTO.cs" />
+    <Compile Include="Models\TagDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProductSellingWorkflow.Common\ProductSellingWorkflow.Common.csproj">
       <Project>{f37e962f-2eb4-47c4-9044-ef720fcc8e66}</Project>
       <Name>ProductSellingWorkflow.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductSellingWorkflow.Data.Views\ProductSellingWorkflow.Data.Views.csproj">
+      <Project>{2f02c507-448b-44b1-a276-f8a4b56b4f2b}</Project>
+      <Name>ProductSellingWorkflow.Data.Views</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProductSellingWorkflow.DataModel\ProductSellingWorkflow.DataModel.csproj">
       <Project>{b1c507a3-a578-45f6-be91-e7f3524d952c}</Project>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductSellingWorkflow", "ProductSellingWorkflow\ProductSellingWorkflow.csproj", "{3D688467-1CBD-41D0-B228-F899771CEF93}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductSellingWorkflow.Repository", "ProductSellingWorkflow.Repository\ProductSellingWorkflow.Repository.csproj", "{4741A76C-BF8A-4E8F-A515-100F82ABDAA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductSellingWorkflow.Service", "ProductSellingWorkflow.Service\ProductSellingWorkflow.Service.csproj", "{28EE042E-1C34-46C2-A0FF-198F659C8AF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductSellingWorkflow.Data.Views", "ProductSellingWorkflow.Data.Views\ProductSellingWorkflow.Data.Views.csproj", "{2F02C507-448B-44B1-A276-F8A4B56B4F2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,8 +47,15 @@ Global
 		{28EE042E-1C34-46C2-A0FF-198F659C8AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28EE042E-1C34-46C2-A0FF-198F659C8AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28EE042E-1C34-46C2-A0FF-198F659C8AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F02C507-448B-44B1-A276-F8A4B56B4F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F02C507-448B-44B1-A276-F8A4B56B4F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F02C507-448B-44B1-A276-F8A4B56B4F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F02C507-448B-44B1-A276-F8A4B56B4F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E26F6258-079B-409D-8D28-B8DADDBA6883}
 	EndGlobalSection
 EndGlobal

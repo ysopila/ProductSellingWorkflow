@@ -13,17 +13,20 @@ namespace ProductSellingWorkflow.Service.Events
 			OperationId = operationId;
 		}
 
-		protected virtual ProductLog CreateLog(string property, string value)
+		protected virtual ProductLog CreateLog(Product product, string property, string value)
 		{
-			return new ProductLog
+			var log = new ProductLog
 			{
 				CreatedAt = DateTimeOffset.UtcNow,
 				Operation = Operation,
 				OperationId = OperationId,
 				Property = property,
 				Type = Type,
-				Value = value
+				Value = value,
+				ProductId = product.Id
 			};
+			product.ProductLogs.Add(log);
+			return log;
 		}
 
 		protected virtual ProductLogOperation Operation => ProductLogOperation.Set;

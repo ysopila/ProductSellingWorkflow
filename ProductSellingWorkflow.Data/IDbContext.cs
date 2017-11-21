@@ -14,5 +14,6 @@ namespace ProductSellingWorkflow.Data
 		IEnumerable<DbEntityValidationResult> GetValidationErrors();
 		DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 		DbEntityEntry Entry(object entity);
+		DbChangeTracker ChangeTracker { get; }
 	}
 }

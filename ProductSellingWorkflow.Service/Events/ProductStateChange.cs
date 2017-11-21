@@ -31,7 +31,7 @@ namespace ProductSellingWorkflow.Service.Events
 			{
 				product.State = Value;
 
-				if (createLog) product.ProductLogs.Add(CreateLog("State", Value.ToString()));
+				if (createLog) CreateLog(product, "State", Value.ToString());
 			}
 			return result;
 		}

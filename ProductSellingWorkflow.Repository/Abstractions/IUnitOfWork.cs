@@ -6,6 +6,7 @@ namespace ProductSellingWorkflow.Repository.Abstractions
 	public interface IUnitOfWork : IDisposable
 	{
 		void Save();
+		void Rollback();
 		void Recycle();
 
 		IProductRepository ProductRepository { get; }

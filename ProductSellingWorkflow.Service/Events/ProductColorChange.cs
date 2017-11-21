@@ -15,7 +15,7 @@ namespace ProductSellingWorkflow.Service.Events
 			{
 				product.Color = Value;
 
-				if (createLog) product.ProductLogs.Add(CreateLog("Color", Value));
+				if (createLog) CreateLog(product, "Color", Value);
 			}
 			return result;
 		}

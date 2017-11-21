@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -231,6 +232,10 @@
       <Project>{f37e962f-2eb4-47c4-9044-ef720fcc8e66}</Project>
       <Name>ProductSellingWorkflow.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProductSellingWorkflow.Data.Views\ProductSellingWorkflow.Data.Views.csproj">
+      <Project>{2f02c507-448b-44b1-a276-f8a4b56b4f2b}</Project>
+      <Name>ProductSellingWorkflow.Data.Views</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProductSellingWorkflow.DataModel\ProductSellingWorkflow.DataModel.csproj">
       <Project>{b1c507a3-a578-45f6-be91-e7f3524d952c}</Project>
       <Name>ProductSellingWorkflow.DataModel</Name>
@@ -247,6 +252,9 @@
       <Project>{28ee042e-1c34-46c2-a0ff-198f659c8af1}</Project>
       <Name>ProductSellingWorkflow.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
