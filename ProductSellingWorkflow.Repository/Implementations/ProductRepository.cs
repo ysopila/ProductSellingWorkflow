@@ -14,7 +14,7 @@ namespace ProductSellingWorkflow.Repository.Implementations
 
 		protected override IQueryable<Product> Query
 		{
-			get { return base.Query.Include(x => x.ProductLogs); }
+			get { return base.Query.Include(x => x.ProductLogs).Include(x => x.ProductTags.Select(s => s.Tag)); }
 		}
 
 		public ProductModel GetOne(int id)

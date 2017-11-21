@@ -14,6 +14,7 @@
             <th>Size</th>
             <th>Color</th>
             <th>State</th>
+            <th>Tags</th>
             <th>Created At</th>
             <th>Modified At</th>
             <th>Actions</th>
@@ -28,6 +29,7 @@
                 <td>@item.Size</td>
                 <td>@item.Color</td>
                 <td>@item.State</td>
+                <td>@string.Join(", ", item.Tags)</td>
                 <td>@item.CreatedAt.ToString("dd MMM yyyy HH:mm:ss")</td>
                 <td>@item.ModifiedAt.ToString("dd MMM yyyy HH:mm:ss")</td>
                 <td>@Html.ActionLink("Edit", "Edit", "Product", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })</td>

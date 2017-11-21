@@ -11,6 +11,11 @@
 @using (Html.BeginForm("Edit", "Product", null, FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.HiddenName)
+    @Html.HiddenFor(x => x.HiddenDescription)
+    @Html.HiddenFor(x => x.HiddenColor)
+    @Html.HiddenFor(x => x.HiddenSize)
+    @Html.HiddenFor(x => x.HiddenTags)
 
     <div class="form-group">
         <label class="col-sm-2 control-label"><span class="text-danger">*</span>&nbsp;<span>@Html.DisplayNameFor(x => x.Name)</span></label>

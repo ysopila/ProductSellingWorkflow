@@ -1,6 +1,5 @@
 ﻿using ProductSellingWorkflow.Models;
 using ProductSellingWorkflow.Service.Abstractions;
-using ProductSellingWorkflow.Service.Events;
 using System.Web.Mvc;
 
 namespace ProductSellingWorkflow.Controllers
@@ -32,9 +31,7 @@ namespace ProductSellingWorkflow.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var @event = new CreateProductEvent();
-
-				@event.Color = model.Color;
+				var @event = model.ToCreateProductEvent();
 
 				_service.Create(@event);
 
@@ -59,9 +56,7 @@ namespace ProductSellingWorkflow.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var @event = new UpdateProductEvent(model.Id);
-
-				@event.Color = model.Color;
+				var @event = model.ToUpdateProductEvent();
 
 				_service.Update(@event);
 

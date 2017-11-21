@@ -1,10 +1,10 @@
-﻿using ProductSellingWorkflow.Common.Enums;
+﻿using ProductSellingWorkflow.Common.Core;
 using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
+using ProductSellingWorkflow.Repository.Models;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,48 +13,23 @@ namespace ProductSellingWorkflow.Service.Implementations
 	public class ProductService : IProductService
 	{
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly ISimpleMapper _mapper;
 
-		private static List<string> SetKeys = new List<string> { "Name", "Description", "Size", "Color" };
-
-		public ProductService(IUnitOfWork unitOfWork)
+		public ProductService(IUnitOfWork unitOfWork, ISimpleMapper mapper)
 		{
 			_unitOfWork = unitOfWork;
+			_mapper = mapper;
 		}
 
 		public ProductDTO Get(int id)
 		{
 			var product = _unitOfWork.ProductRepository.GetOne(id);
-
-			return new ProductDTO
-			{
-				Id = product.Id,
-				Color = product.Color,
-				CreatedAt = product.CreatedAt,
-				Description = product.Description,
-				ModifiedAt = product.ModifiedAt,
-				Tags = product.Tags,
-				Name = product.Name,
-				Size = product.Size,
-				State = product.State
-			};
+			return _mapper.Map<ProductModel, ProductDTO>(product);
 		}
 
 		public IEnumerable<ProductDTO> GetAll()
 		{
-			return _unitOfWork.ProductRepository
-				.GetAll()
-				.Select(x => new ProductDTO
-				{
-					Id = x.Id,
-					Color = x.Color,
-					CreatedAt = x.CreatedAt,
-					Description = x.Description,
-					ModifiedAt = x.ModifiedAt,
-					Tags = x.Tags,
-					Name = x.Name,
-					Size = x.Size,
-					State = x.State
-				});
+			return _unitOfWork.ProductRepository.GetAll().Map(_mapper.GetMapper<ProductModel, ProductDTO>());
 		}
 
 		public void Create(CreateProductEvent @event)
@@ -72,6 +47,27 @@ namespace ProductSellingWorkflow.Service.Implementations
 			var product = _unitOfWork.ProductRepository.Find(x => x.Id == @event.Id).FirstOrDefault();
 
 			@event.Apply(product, true);
+
+			//if (@event.AddedTags != null)
+			//{
+			//	var allTags = _unitOfWork.TagRepository.Find(x => @event.AddedTags.Contains(x.Name));
+
+			//	foreach (var item in @event.AddedTags)
+			//	{
+			//		var tag = allTags.FirstOrDefault(x => x.Name == item) ?? new Tag { Name = item };
+
+			//		product.ProductTags.Add(new ProductTag { Tag = tag });
+			//	}
+			//}
+
+			//if (@event.RemovedTags != null)
+			//{
+			//	foreach (var item in @event.RemovedTags)
+			//	{
+			//		var productTag = product.ProductTags.FirstOrDefault(x => x.Tag.Name == item);
+			//		_unitOfWork.ProductTagRepository.Delete(productTag);
+			//	}
+			//}
 
 			_unitOfWork.ProductRepository.Update(product);
 			_unitOfWork.Save();

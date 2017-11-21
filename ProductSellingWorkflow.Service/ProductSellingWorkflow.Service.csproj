@@ -41,8 +41,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\IProductService.cs" />
-    <Compile Include="Events\ChangeProductEvent.cs" />
+    <Compile Include="Events\BuyEvent.cs" />
+    <Compile Include="Events\ComplexProductEvent.cs" />
+    <Compile Include="Events\CreateProductEvent.cs" />
+    <Compile Include="Events\MoveInCatalogEvent.cs" />
+    <Compile Include="Events\ProductTagsRemove.cs" />
+    <Compile Include="Events\ProductTagsAdd.cs" />
+    <Compile Include="Events\ProductSizeChange.cs" />
+    <Compile Include="Events\ProductDescriptionChange.cs" />
+    <Compile Include="Events\ProductNameChange.cs" />
+    <Compile Include="Events\ProductColorChange.cs" />
+    <Compile Include="Events\ProductEvent.cs" />
+    <Compile Include="Events\ProductPropertyChange.cs" />
+    <Compile Include="Events\ProductStateChange.cs" />
+    <Compile Include="Events\UpdateProductEvent.cs" />
     <Compile Include="Implementations\ProductService.cs" />
+    <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ProductSellingWorkflow.Service.Events;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -6,31 +7,28 @@ namespace ProductSellingWorkflow.Models
 {
 	public class ProductCreateViewModel
 	{
-		private static List<string> ExcludedProperties = new List<string> { "Id" };
-
 		[Required]
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string Size { get; set; }
 		public string Color { get; set; }
+		public string Tags { get; set; }
 
-		public virtual Dictionary<string, object> ToPropertiesDictionary()
+		public CreateProductEvent ToCreateProductEvent()
 		{
-			var result = new Dictionary<string, object>();
-			var properties = GetType().GetProperties();
-
-			foreach (var prop in properties.Where(x => !ExcludedProperties.Contains(x.Name)))
+			var @event = new CreateProductEvent
 			{
-				var value = prop.GetValue(this, null);
+				Name = Name,
+				Description = Description,
+				Size = Size,
+				Color = Color
+			};
 
-				if (value != null)
-				{
-					result.Add(prop.Name, value);
-				}
-			}
+			var added = Tags.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
 
-			return result;
+			if (added.Any()) @event.AddedTags = added;
+
+			return @event;
 		}
-
 	}
 }
