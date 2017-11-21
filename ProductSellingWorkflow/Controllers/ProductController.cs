@@ -2,6 +2,7 @@
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace ProductSellingWorkflow.Controllers
 {
@@ -36,9 +37,12 @@ namespace ProductSellingWorkflow.Controllers
 
 				@event.Color = model.Color;
 
-				_service.Create(@event);
+				var result = _service.Create(@event);
 
-				return RedirectToAction("Index", "Product");
+				PopulateModelState(result);
+
+				if (ModelState.IsValid)
+					return RedirectToAction("Index", "Product");
 			}
 
 			return View(model);
@@ -63,12 +67,22 @@ namespace ProductSellingWorkflow.Controllers
 
 				@event.Color = model.Color;
 
-				_service.Update(@event);
+				var result = _service.Update(@event);
 
-				return RedirectToAction("Index", "Product");
+				PopulateModelState(result);
+
+				if (ModelState.IsValid)
+					return RedirectToAction("Index", "Product");
 			}
 
 			return View(model);
+		}
+
+		private void PopulateModelState(EventResult result)
+		{
+			if (result.Errors?.Any() == true)
+				foreach (var e in result.Errors)
+					ModelState.AddModelError(string.Empty, e.Message);
 		}
 	}
 }

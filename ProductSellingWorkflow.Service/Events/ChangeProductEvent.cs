@@ -1,12 +1,48 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 using ProductSellingWorkflow.DataModel;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace ProductSellingWorkflow.Service.Events
 {
+	public class EventValidationError
+	{
+		public string Property { get; set; }
+		public string Message { get; set; }
+	}
+
+	public class EventResult
+	{
+		public IList<EventValidationError> Errors { get; internal set; } = new List<EventValidationError>();
+
+		public bool Success => !Errors.Any();
+
+		public static EventResult operator +(EventResult e1, EventResult e2)
+		{
+			return new EventResult {
+				Errors = e1?.Errors == null 
+					? e2?.Errors 
+					: e2?.Errors == null
+						? e1?.Errors
+						: e1.Errors.Union(e2.Errors).ToList()
+			};
+		}
+	}
+
 	public abstract class ProductEvent
 	{
-		internal abstract void Apply(Product product, bool createLog = true);
+		internal virtual EventResult Apply(Product product, bool createLog = true)
+		{
+			var result = new EventResult();
+			result.Errors = Validate(product);
+			return result;
+		}
+
+		internal virtual IList<EventValidationError> Validate(Product product)
+		{
+			return new List<EventValidationError>();
+		}
 	}
 
 	public abstract class ProductPropertyChange<T> : ProductEvent
@@ -42,12 +78,17 @@ namespace ProductSellingWorkflow.Service.Events
 	{
 		public ProductColorChange(string value, ProductLogType type, Guid operationId) : base(value, type, operationId) { }
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			product.Color = Value;
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				product.Color = Value;
 
-			if (createLog)
-				product.ProductLogs.Add(CreateLog("Color", Value.ToString()));
+				if (createLog)
+					product.ProductLogs.Add(CreateLog("Color", Value.ToString()));
+			}
+			return result;
 		}
 	}
 
@@ -55,12 +96,32 @@ namespace ProductSellingWorkflow.Service.Events
 	{
 		public ProductStateChange(ProductState value, ProductLogType type, Guid operationId) : base(value, type, operationId) { }
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override IList<EventValidationError> Validate(Product product)
 		{
-			product.State = Value;
+			var result = base.Validate(product);
 
-			if (createLog)
-				product.ProductLogs.Add(CreateLog("State", Value.ToString()));
+			if (product.State != ProductState.InCatalog
+				&& Value == ProductState.Sold)
+				result.Add(new EventValidationError { Property = "State", Message = "Cannot sell product that is not in catalog" });
+
+			if (product.State == ProductState.Sold
+				&& Value == ProductState.InCatalog)
+				result.Add(new EventValidationError { Property = "State", Message = "Cannot move sold product in catalog" });
+
+			return result;
+		}
+
+		internal override EventResult Apply(Product product, bool createLog = true)
+		{
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				product.State = Value;
+
+				if (createLog)
+					product.ProductLogs.Add(CreateLog("State", Value.ToString()));
+			}
+			return result;
 		}
 	}
 
@@ -77,9 +138,14 @@ namespace ProductSellingWorkflow.Service.Events
 
 		protected override ProductLogType Type => ProductLogType.Create;
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			_color?.Apply(product, createLog);
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				result += _color?.Apply(product, createLog);
+			}
+			return result;
 		}
 
 		public CreateProductEvent()
@@ -115,9 +181,14 @@ namespace ProductSellingWorkflow.Service.Events
 			_state = new ProductStateChange(ProductState.InCatalog, Type, OperationId);
 		}
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			_state?.Apply(product, createLog);
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				result += _state?.Apply(product, createLog);
+			}
+			return result;
 		}
 	}
 
@@ -131,9 +202,14 @@ namespace ProductSellingWorkflow.Service.Events
 			_state = new ProductStateChange(ProductState.Sold, Type, OperationId);
 		}
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			_state?.Apply(product, createLog);
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				result += _state?.Apply(product, createLog);
+			}
+			return result;
 		}
 	}
 }

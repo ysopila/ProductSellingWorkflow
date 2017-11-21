@@ -8,7 +8,7 @@ namespace ProductSellingWorkflow.Service.Abstractions
 	{
 		ProductDTO Get(int id);
 		IEnumerable<ProductDTO> GetAll();
-		void Create(CreateProductEvent @event);
-		void Update(UpdateProductEvent @event);
+		EventResult Create(CreateProductEvent @event);
+		EventResult Update(UpdateProductEvent @event);
 	}
 }

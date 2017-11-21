@@ -57,24 +57,30 @@ namespace ProductSellingWorkflow.Service.Implementations
 				});
 		}
 
-		public void Create(CreateProductEvent @event)
+		public EventResult Create(CreateProductEvent @event)
 		{
 			var product = new Product();
 
-			@event.Apply(product, true);
-
-			_unitOfWork.ProductRepository.Insert(product);
-			_unitOfWork.Save();
+			var result = @event.Apply(product, true);
+			if (result.Success)
+			{
+				_unitOfWork.ProductRepository.Insert(product);
+				_unitOfWork.Save();
+			}
+			return result;
 		}
 
-		public void Update(UpdateProductEvent @event)
+		public EventResult Update(UpdateProductEvent @event)
 		{
 			var product = _unitOfWork.ProductRepository.Find(x => x.Id == @event.Id).FirstOrDefault();
 
-			@event.Apply(product, true);
-
-			_unitOfWork.ProductRepository.Update(product);
-			_unitOfWork.Save();
+			var result = @event.Apply(product, true);
+			if (result.Success)
+			{
+				_unitOfWork.ProductRepository.Update(product);
+				_unitOfWork.Save();
+			}
+			return result;
 		}
 	}
 }
