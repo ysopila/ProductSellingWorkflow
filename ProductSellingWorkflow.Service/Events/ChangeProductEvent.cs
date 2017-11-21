@@ -15,6 +15,7 @@ namespace ProductSellingWorkflow.Service.Events
 		{
 			Value = value;
 			Type = type;
+			OperationId = operationId;
 		}
 
 		protected virtual ProductLog CreateLog(string property, string value)
