@@ -78,32 +78,7 @@ namespace ProductSellingWorkflow.Repository.Implementations
 				query = query.Skip(skip.Value);
 			if (take.HasValue)
 				query = query.Take(take.Value);
-			return query.ToList();
-		}
-
-		public virtual IEnumerable<T> FindNoTracking(
-		   Expression<Func<T, bool>> filter = null,
-		   Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-		   string includeProperties = "",
-		   int? skip = null,
-		   int? take = null)
-		{
-			IQueryable<T> query = Query;
-
-			if (filter != null)
-				query = query.AsNoTracking().Where(filter);
-
-			foreach (var includeProperty in includeProperties.Split
-				(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-				query = query.Include(includeProperty);
-
-			if (orderBy != null)
-				query = orderBy(query);
-			if (skip.HasValue)
-				query = query.Skip(skip.Value);
-			if (take.HasValue)
-				query = query.Take(take.Value);
-			return query.ToList();
+			return query.AsNoTracking().ToList();
 		}
 	}
 }

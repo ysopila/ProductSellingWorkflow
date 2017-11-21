@@ -13,9 +13,14 @@ namespace ProductSellingWorkflow.Service.Events
 			_state = new ProductStateChange(ProductState.InCatalog, Type, OperationId);
 		}
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			_state?.Apply(product, createLog);
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				result += _state?.Apply(product, createLog);
+			}
+			return result;
 		}
 	}
 }

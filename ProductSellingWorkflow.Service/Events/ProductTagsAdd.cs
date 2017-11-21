@@ -11,12 +11,14 @@ namespace ProductSellingWorkflow.Service.Events
 
 		protected override ProductLogOperation Operation => ProductLogOperation.Add;
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			foreach (var item in Value)
-				product.ProductTags.Add(new ProductTag { Tag = new Tag { Name = item } });
-
-			if (createLog) product.ProductLogs.Add(CreateLog("Tags", string.Join(", ", Value)));
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				if (createLog) product.ProductLogs.Add(CreateLog("Tags", string.Join(", ", Value)));
+			}
+			return result;
 		}
 	}
 }

@@ -1,7 +1,5 @@
 ﻿using ProductSellingWorkflow.Service.Events;
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace ProductSellingWorkflow.Models
 {
@@ -24,9 +22,9 @@ namespace ProductSellingWorkflow.Models
 				Color = Color
 			};
 
-			var added = Tags.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
+			//var added = Tags.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
 
-			if (added.Any()) @event.AddedTags = added;
+			//if (added.Any()) @event.AddedTags = added;
 
 			return @event;
 		}

@@ -11,9 +11,14 @@ namespace ProductSellingWorkflow.Service.Events
 
 		protected override ProductLogOperation Operation => ProductLogOperation.Remove;
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			if (createLog) product.ProductLogs.Add(CreateLog("Tags", string.Join(", ", Value)));
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				if (createLog) product.ProductLogs.Add(CreateLog("Tags", string.Join(", ", Value)));
+			}
+			return result;
 		}
 	}
 }

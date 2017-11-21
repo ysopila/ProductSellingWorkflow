@@ -15,14 +15,17 @@ namespace ProductSellingWorkflow.Service.Events
 
 		protected override ProductLogType Type => ProductLogType.Create;
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			_name?.Apply(product, createLog);
-			_description?.Apply(product, createLog);
-			_color?.Apply(product, createLog);
-			_size?.Apply(product, createLog);
-			//_tagsAdd?.Apply(product, createLog);
-			//_tagsRemove?.Apply(product, createLog);
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				result += _name?.Apply(product, createLog);
+				result += _description?.Apply(product, createLog);
+				result += _color?.Apply(product, createLog);
+				result += _size?.Apply(product, createLog);
+			}
+			return result;
 		}
 
 		public string Name

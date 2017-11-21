@@ -44,6 +44,7 @@
     <Compile Include="Events\BuyEvent.cs" />
     <Compile Include="Events\ComplexProductEvent.cs" />
     <Compile Include="Events\CreateProductEvent.cs" />
+    <Compile Include="Events\EventResult.cs" />
     <Compile Include="Events\MoveInCatalogEvent.cs" />
     <Compile Include="Events\ProductTagsRemove.cs" />
     <Compile Include="Events\ProductTagsAdd.cs" />

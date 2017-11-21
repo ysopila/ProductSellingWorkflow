@@ -8,11 +8,16 @@ namespace ProductSellingWorkflow.Service.Events
 	{
 		public ProductSizeChange(string value, ProductLogType type, Guid operationId) : base(value, type, operationId) { }
 
-		internal override void Apply(Product product, bool createLog = true)
+		internal override EventResult Apply(Product product, bool createLog = true)
 		{
-			product.Size = Value;
+			var result = base.Apply(product, createLog);
+			if (result.Success)
+			{
+				product.Size = Value;
 
-			if (createLog) product.ProductLogs.Add(CreateLog("Size", Value));
+				if (createLog) product.ProductLogs.Add(CreateLog("Size", Value));
+			}
+			return result;
 		}
 	}
 }

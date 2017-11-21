@@ -32,45 +32,51 @@ namespace ProductSellingWorkflow.Service.Implementations
 			return _unitOfWork.ProductRepository.GetAll().Map(_mapper.GetMapper<ProductModel, ProductDTO>());
 		}
 
-		public void Create(CreateProductEvent @event)
+		public EventResult Create(CreateProductEvent @event)
 		{
 			var product = new Product();
 
-			@event.Apply(product, true);
-
-			_unitOfWork.ProductRepository.Insert(product);
-			_unitOfWork.Save();
+			var result = @event.Apply(product, true);
+			if (result.Success)
+			{
+				_unitOfWork.ProductRepository.Insert(product);
+				_unitOfWork.Save();
+			}
+			return result;
 		}
 
-		public void Update(UpdateProductEvent @event)
+		public EventResult Update(UpdateProductEvent @event)
 		{
 			var product = _unitOfWork.ProductRepository.Find(x => x.Id == @event.Id).FirstOrDefault();
 
-			@event.Apply(product, true);
+			var result = @event.Apply(product, true);
+			if (result.Success)
+			{
+				//if (@event.AddedTags != null)
+				//{
+				//	var allTags = _unitOfWork.TagRepository.Find(x => @event.AddedTags.Contains(x.Name));
 
-			//if (@event.AddedTags != null)
-			//{
-			//	var allTags = _unitOfWork.TagRepository.Find(x => @event.AddedTags.Contains(x.Name));
+				//	foreach (var item in @event.AddedTags)
+				//	{
+				//		var tag = allTags.FirstOrDefault(x => x.Name == item) ?? new Tag { Name = item };
 
-			//	foreach (var item in @event.AddedTags)
-			//	{
-			//		var tag = allTags.FirstOrDefault(x => x.Name == item) ?? new Tag { Name = item };
+				//		product.ProductTags.Add(new ProductTag { Tag = tag });
+				//	}
+				//}
 
-			//		product.ProductTags.Add(new ProductTag { Tag = tag });
-			//	}
-			//}
+				//if (@event.RemovedTags != null)
+				//{
+				//	foreach (var item in @event.RemovedTags)
+				//	{
+				//		var productTag = product.ProductTags.FirstOrDefault(x => x.Tag.Name == item);
+				//		_unitOfWork.ProductTagRepository.Delete(productTag);
+				//	}
+				//}
 
-			//if (@event.RemovedTags != null)
-			//{
-			//	foreach (var item in @event.RemovedTags)
-			//	{
-			//		var productTag = product.ProductTags.FirstOrDefault(x => x.Tag.Name == item);
-			//		_unitOfWork.ProductTagRepository.Delete(productTag);
-			//	}
-			//}
-
-			_unitOfWork.ProductRepository.Update(product);
-			_unitOfWork.Save();
+				_unitOfWork.ProductRepository.Update(product);
+				_unitOfWork.Save();
+			}
+			return result;
 		}
 	}
 }

@@ -13,12 +13,6 @@ namespace ProductSellingWorkflow.Repository.Abstractions
 			string includeProperties = "",
 			int? skip = null,
 			int? take = null);
-		IEnumerable<T> FindNoTracking(
-			Expression<Func<T, bool>> filter = null,
-			Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-			string includeProperties = "",
-			int? skip = null,
-			int? take = null);
 		void Insert(T obj);
 		void Update(T obj);
 		void Delete(T obj);
