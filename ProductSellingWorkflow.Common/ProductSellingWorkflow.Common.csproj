@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ISimpleMapper.cs" />
+    <Compile Include="Core\Roles.cs" />
     <Compile Include="Core\SimpleMapper.cs" />
     <Compile Include="Enums\ProductLogType.cs" />
     <Compile Include="Enums\ProductState.cs" />

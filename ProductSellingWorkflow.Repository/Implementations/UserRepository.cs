@@ -17,7 +17,8 @@ namespace ProductSellingWorkflow.Repository.Implementations
 				Id = x.Id,
 				Name = x.Name,
 				Email = x.Email,
-				Password = x.Password
+				Password = x.Password,
+				Roles = x.Roles.Select(s => s.Role.Name)
 			})
 			.FirstOrDefault();
 

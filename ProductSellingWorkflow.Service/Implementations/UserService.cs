@@ -3,6 +3,8 @@ using ProductSellingWorkflow.Data.Views;
 using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Service.Abstractions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProductSellingWorkflow.Service.Implementations
 {
@@ -17,7 +19,7 @@ namespace ProductSellingWorkflow.Service.Implementations
 			_mapper = mapper;
 		}
 
-		public bool Create(string name, string email, string password, out UserView user)
+		public bool Create(string name, string email, string password, List<string> roles, out UserView user)
 		{
 			user = _unitOfWork.UserRepository.GetOne(email);
 
@@ -29,6 +31,18 @@ namespace ProductSellingWorkflow.Service.Implementations
 					Email = email,
 					Password = password
 				};
+
+				var rolesInDatabase = _unitOfWork.RoleRepository.Find(x => roles.Contains(x.Name));
+
+				foreach (var role in roles)
+				{
+					var roleInDatabase = rolesInDatabase.FirstOrDefault(x => x.Name == role);
+
+					if (roleInDatabase == null)
+						entity.Roles.Add(new UserInRole { Role = new Role { Name = role } });
+					else
+						entity.Roles.Add(new UserInRole { RoleId = roleInDatabase.Id });
+				}
 
 				_unitOfWork.UserRepository.Insert(entity);
 				_unitOfWork.Save();

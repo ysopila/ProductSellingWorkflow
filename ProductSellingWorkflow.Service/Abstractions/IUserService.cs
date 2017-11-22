@@ -1,4 +1,5 @@
 ﻿using ProductSellingWorkflow.Data.Views;
+using System.Collections.Generic;
 
 namespace ProductSellingWorkflow.Service.Abstractions
 {
@@ -6,6 +7,6 @@ namespace ProductSellingWorkflow.Service.Abstractions
 	{
 		UserView GetByEmail(string email);
 		bool Validate(string email, string password, out UserView user);
-		bool Create(string name, string email, string password, out UserView user);
+		bool Create(string name, string email, string password, List<string> roles, out UserView user);
 	}
 }

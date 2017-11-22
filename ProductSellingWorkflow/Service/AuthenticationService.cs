@@ -2,6 +2,7 @@
 using ProductSellingWorkflow.Data.Views;
 using ProductSellingWorkflow.Service.Abstractions;
 using System;
+using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
@@ -24,10 +25,10 @@ namespace ProductSellingWorkflow.Service
 				DateTime.UtcNow,
 				DateTime.UtcNow.AddMinutes(30),
 				createPersistentCookie,
-				JsonConvert.SerializeObject(user));
+				JsonConvert.SerializeObject(user.Roles));
 
 			HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket)));
-			HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(user.Email, "Forms"), null);
+			HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(user.Email, "Forms"), user.Roles.ToArray());
 		}
 
 		public void SignOut()

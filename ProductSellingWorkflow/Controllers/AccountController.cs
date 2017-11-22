@@ -1,6 +1,7 @@
 ﻿using ProductSellingWorkflow.Data.Views;
 using ProductSellingWorkflow.Models;
 using ProductSellingWorkflow.Service.Abstractions;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ProductSellingWorkflow.Controllers
@@ -76,7 +77,9 @@ namespace ProductSellingWorkflow.Controllers
 			{
 				UserView user = null;
 
-				if (_userService.Create(model.Name, model.Email, model.Password, out user))
+				var roles = model.AllRoles.Where(x => x.Selected).Select(x => x.Name).ToList();
+
+				if (_userService.Create(model.Name, model.Email, model.Password, roles, out user))
 				{
 					_authService.SignIn(user, true);
 

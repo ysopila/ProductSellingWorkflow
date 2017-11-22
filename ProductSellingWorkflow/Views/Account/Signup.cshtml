@@ -38,6 +38,18 @@
     </div>
 
     <div class="form-group">
+        <label class="col-sm-2 control-label"><span class="text-danger">*</span>&nbsp;<span>@Html.DisplayNameFor(x => x.AllRoles)</span></label>
+        <div class="col-sm-10">
+            @for (int i = 0; i < Model.AllRoles.Count; i++)
+            {
+                <label class="control-label">@Html.CheckBoxFor(x => Model.AllRoles[i].Selected) <span>@Model.AllRoles[i].Name</span></label><br />
+                @Html.HiddenFor(x => Model.AllRoles[i].Name)
+}
+            <p><em><small>@Html.ValidationMessageFor(x => x.AllRoles, String.Empty, new { @class = "text-danger" })</small></em></p>
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-info">Submit</button>
         </div>
