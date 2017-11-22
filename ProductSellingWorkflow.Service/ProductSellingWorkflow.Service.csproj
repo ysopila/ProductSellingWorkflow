@@ -60,6 +60,7 @@
     <Compile Include="Events\Product\CreateProductEvent.cs" />
     <Compile Include="Events\EventResult.cs" />
     <Compile Include="Events\Product\MoveInCatalogEvent.cs" />
+    <Compile Include="EventHandlers\Product\ProductEventFactory.cs" />
     <Compile Include="Events\Product\Properties\ProductPriceChange.cs" />
     <Compile Include="Events\Product\Properties\ProductTagsRemove.cs" />
     <Compile Include="Events\Product\Properties\ProductTagsAdd.cs" />

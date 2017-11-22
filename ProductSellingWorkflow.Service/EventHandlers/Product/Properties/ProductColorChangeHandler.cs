@@ -12,9 +12,12 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties
 		public override EventResult Apply(ProductColorChange e, IEventOptions options)
 		{
 			var result = base.Apply(e, options);
-			Entity.Color = e.Value;
-			if (options.Store)
-				CreateLog("Color", e.Value);
+			if (!string.Equals(Entity.Color, e.Value))
+			{
+				Entity.Color = e.Value;
+				if (options.Store)
+					CreateLog("Color", e.Value);
+			}
 			return result;
 		}
 	}

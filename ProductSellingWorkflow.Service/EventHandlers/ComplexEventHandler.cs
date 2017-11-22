@@ -25,6 +25,12 @@ namespace ProductSellingWorkflow.Service.EventHandlers
 					h.Apply(ev.Value, options);
 			return result;
 		}
+		protected virtual EventResult Rollback(V entity)
+		{
+			UnitOfWork.Rollback();
+			return new EventResult();
+		}
+
 
 		public ComplexEventHandler(IUnitOfWork unitOfWork)
 		{
@@ -37,8 +43,11 @@ namespace ProductSellingWorkflow.Service.EventHandlers
 
 			var entity = GetEntity(e);
 			result += ApplyChanges(entity, e, options);
-			result += SaveChanges(entity);
 
+			if (result.Success)
+				result += SaveChanges(entity);
+			else
+				result += Rollback(entity);
 			return result;
 		}
 	}

@@ -5,6 +5,7 @@ using ProductSellingWorkflow.Controllers;
 using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Repository.Implementations;
 using ProductSellingWorkflow.Service.Abstractions;
+using ProductSellingWorkflow.Service.EventHandlers.Product;
 using ProductSellingWorkflow.Service.Implementations;
 using ProductSellingWorkflow.Service.Mappings;
 using System;
@@ -30,6 +31,7 @@ namespace ProductSellingWorkflow
 			builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 			builder.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
 			builder.RegisterType<TagService>().As<ITagService>().InstancePerLifetimeScope();
+			builder.RegisterType<ProductEventFactory>().As<IProductEventFactory>().InstancePerLifetimeScope();
 
 			builder.RegisterType<Mapper>().As<ISimpleMapper>().InstancePerLifetimeScope();
 

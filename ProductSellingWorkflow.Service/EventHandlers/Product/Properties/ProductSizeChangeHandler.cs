@@ -12,9 +12,12 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties
 		public override EventResult Apply(ProductSizeChange e, IEventOptions options)
 		{
 			var result = base.Apply(e, options);
-			Entity.Size = e.Value;
-			if (options.Store)
-				CreateLog("Size", e.Value);
+			if (!string.Equals(Entity.Size, e.Value))
+			{
+				Entity.Size = e.Value;
+				if (options.Store)
+					CreateLog("Size", e.Value);
+			}
 			return result;
 		}
 	}

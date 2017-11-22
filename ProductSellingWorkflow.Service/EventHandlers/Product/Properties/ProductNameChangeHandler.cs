@@ -12,9 +12,12 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties
 		public override EventResult Apply(ProductNameChange e, IEventOptions options)
 		{
 			var result = base.Apply(e, options);
-			Entity.Name = e.Value;
-			if (options.Store)
-				CreateLog("Name", e.Value);
+			if (!string.Equals(Entity.Name, e.Value))
+			{
+				Entity.Name = e.Value;
+				if (options.Store)
+					CreateLog("Name", e.Value);
+			}
 			return result;
 		}
 	}
