@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace ProductSellingWorkflow.Models
 {
@@ -14,6 +14,6 @@ namespace ProductSellingWorkflow.Models
 		public string Color { get; set; }
 		public string Tags { get; set; }
 
-		public IEnumerable<string> TagsList => Tags?.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
+		public IEnumerable<string> TagsList => Tags?.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
 	}
 }
