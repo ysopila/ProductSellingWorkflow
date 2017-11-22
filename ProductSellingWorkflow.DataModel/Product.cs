@@ -5,7 +5,7 @@ namespace ProductSellingWorkflow.DataModel
 {
 	public class Product
 	{
-		public Product ()
+		public Product()
 		{
 			ProductLogs = new List<ProductLog>();
 			ProductTags = new List<ProductTag>();
@@ -18,6 +18,9 @@ namespace ProductSellingWorkflow.DataModel
 		public string Color { get; set; }
 		public decimal Price { get; set; }
 		public ProductState State { get; set; }
+
+		public int CreatedById { get; set; }
+		public User UserCreator { get; set; }
 
 		public ICollection<ProductLog> ProductLogs { get; set; }
 		public ICollection<ProductTag> ProductTags { get; set; }

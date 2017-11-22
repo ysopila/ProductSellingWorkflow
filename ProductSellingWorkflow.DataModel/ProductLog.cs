@@ -16,5 +16,8 @@ namespace ProductSellingWorkflow.DataModel
 		public string Property { get; set; }
 		public string Value { get; set; }
 		public DateTimeOffset CreatedAt { get; set; }
+
+		public int CreatedById { get; set; }
+		public User UserCreator { get; set; }
 	}
 }

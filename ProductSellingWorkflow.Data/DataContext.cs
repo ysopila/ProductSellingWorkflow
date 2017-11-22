@@ -24,6 +24,9 @@ namespace ProductSellingWorkflow.Data
 			modelBuilder.Configurations.Add(new ProductLogConfiguration());
 			modelBuilder.Configurations.Add(new ProductTagConfiguration());
 			modelBuilder.Configurations.Add(new TagConfiguration());
+			modelBuilder.Configurations.Add(new RoleConfiguration());
+			modelBuilder.Configurations.Add(new UserConfiguration());
+			modelBuilder.Configurations.Add(new UserInRoleConfiguration());
 		}
 	}
 

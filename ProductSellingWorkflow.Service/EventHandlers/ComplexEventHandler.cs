@@ -1,12 +1,12 @@
-﻿using ProductSellingWorkflow.Repository.Abstractions;
+﻿using ProductSellingWorkflow.Common.Enums;
+using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Service.Events;
-using ProductSellingWorkflow.Common.Enums;
 using System;
 using System.Collections.Generic;
 
 namespace ProductSellingWorkflow.Service.EventHandlers
 {
-	public abstract class ComplexEventHandler<T, V> : EventHandlerBase<T> where T : ComplexEvent where V: class
+	public abstract class ComplexEventHandler<T, V> : EventHandlerBase<T> where T : ComplexEvent where V : class
 	{
 		protected abstract LogOperation Operation { get; }
 		protected virtual Guid OperationId { get; } = Guid.NewGuid();

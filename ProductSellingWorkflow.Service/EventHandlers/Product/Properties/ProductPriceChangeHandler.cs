@@ -12,9 +12,14 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties
 		public override EventResult Apply(ProductPriceChange e, IEventOptions options)
 		{
 			var result = base.Apply(e, options);
-			Entity.Price = e.Value;
-			if (options.Store)
-				CreateLog("Price", e.Value.ToString());
+
+			if (!decimal.Equals(Entity.Price, e.Value))
+			{
+				Entity.Price = e.Value;
+				if (options.Store)
+					CreateLog("Price", e.Value.ToString());
+			}
+
 			return result;
 		}
 	}
