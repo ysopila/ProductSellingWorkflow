@@ -1,7 +1,7 @@
 ﻿using ProductSellingWorkflow.Models;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
-using System.Collections.Generic;
+using ProductSellingWorkflow.Service.Events.Product;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -36,19 +36,16 @@ namespace ProductSellingWorkflow.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var tags = model.TagsList?.Any() == true ? _serviceTags.Get(model.TagsList).Select(x => new ProductTag { Id = x.Id, Value = x.Name }) : new List<ProductTag>();
-				// Adding new tags
-				tags = tags.Union(model.TagsList.Where(x => !tags.Any(t => t.Value == x)).Select(x => new ProductTag { Value = x })).ToList();
-
 				var @event = new CreateProductEvent
 				{
-					AddedTags = tags
+					AddedTags = model.TagsList
 				};
 
 				if (!string.Equals(model.Name, null)) @event.Name = model.Name;
 				if (!string.Equals(model.Description, null)) @event.Description = model.Description;
 				if (!string.Equals(model.Color, null)) @event.Color = model.Color;
 				if (!string.Equals(model.Size, null)) @event.Size = model.Size;
+				if (!decimal.Equals(model.Price, 0)) @event.Price = model.Price;
 
 				var result = _service.Create(@event);
 
@@ -82,18 +79,15 @@ namespace ProductSellingWorkflow.Controllers
 				if (!string.Equals(model.Description, model.Original.Description)) @event.Description = model.Description;
 				if (!string.Equals(model.Color, model.Original.Color)) @event.Color = model.Color;
 				if (!string.Equals(model.Size, model.Original.Size)) @event.Size = model.Size;
+				if (!decimal.Equals(model.Price, model.Original.Price)) @event.Price = model.Price;
 
 				var addedTags = model.TagsList?.Where(x => model.Original.Tags?.Contains(x) != true);
 				var removedTags = model.Original.Tags?.Where(x => model.TagsList?.Contains(x) != true);
 
-				var tags = addedTags?.Any() == true || removedTags?.Any() == true
-					? _serviceTags.Get((addedTags ?? (new string[0])).Union(removedTags ?? new string[0])).Select(x => new ProductTag { Id = x.Id, Value = x.Name })
-					: null;
-
 				if (addedTags?.Any() == true)
-					@event.AddedTags = addedTags.Select(x => tags.FirstOrDefault(t => t.Value == x) ?? new ProductTag { Value = x });
+					@event.AddedTags = addedTags;
 				if (removedTags?.Any() == true)
-					@event.RemovedTags = removedTags.Select(x => tags.FirstOrDefault(t => t.Value == x)).Where(x => x != null);
+					@event.RemovedTags = removedTags;
 
 				var result = _service.Update(@event);
 

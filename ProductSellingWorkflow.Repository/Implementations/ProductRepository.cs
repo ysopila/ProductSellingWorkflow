@@ -44,6 +44,7 @@ namespace ProductSellingWorkflow.Repository.Implementations
 						Color = x.Color,
 						Description = x.Description,
 						Size = x.Size,
+						Price = x.Price,
 						State = x.State,
 						CreatedAt = l.CreatedAt,
 						ModifiedAt = l.ModifiedAt,

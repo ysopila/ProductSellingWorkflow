@@ -17,6 +17,7 @@ namespace ProductSellingWorkflow.Models
 				Color = product.Color,
 				Description = product.Description,
 				Size = product.Size,
+				Price = product.Price,
 				Tags = string.Join(", ", product.Tags),
 				Original = product
 			};

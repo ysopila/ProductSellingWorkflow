@@ -12,6 +12,7 @@ namespace ProductSellingWorkflow.Data.Views
 		public string Description { get; set; }
 		public string Size { get; set; }
 		public string Color { get; set; }
+		public decimal Price { get; set; }
 		public IEnumerable<string> Tags { get; set; }
 		public ProductState State { get; set; }
 		public DateTimeOffset CreatedAt { get; set; }

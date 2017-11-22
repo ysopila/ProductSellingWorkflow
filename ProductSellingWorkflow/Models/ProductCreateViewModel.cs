@@ -12,6 +12,7 @@ namespace ProductSellingWorkflow.Models
 		public string Description { get; set; }
 		public string Size { get; set; }
 		public string Color { get; set; }
+		public decimal Price { get; set; }
 		public string Tags { get; set; }
 
 		public IEnumerable<string> TagsList => Tags?.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
