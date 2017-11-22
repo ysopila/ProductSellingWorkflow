@@ -1,13 +1,12 @@
 ﻿using ProductSellingWorkflow.Common.Core;
-using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Data.Views;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
 using System.Collections.Generic;
-using System.Linq;
 using ProductSellingWorkflow.Service.EventHandlers.Product;
 using ProductSellingWorkflow.Service.EventHandlers;
+using ProductSellingWorkflow.Service.Events.Product;
 
 namespace ProductSellingWorkflow.Service.Implementations
 {

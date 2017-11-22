@@ -3,6 +3,7 @@ using ProductSellingWorkflow.Service.EventHandlers.Product.Properties;
 using ProductSellingWorkflow.Service.Events;
 using System.Collections.Generic;
 using ProductSellingWorkflow.Common.Enums;
+using ProductSellingWorkflow.Service.Events.Product;
 
 namespace ProductSellingWorkflow.Service.EventHandlers.Product
 {
@@ -19,9 +20,7 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 			return new DataModel.Product { };
 		}
 
-		protected override IList<EventHandlerBase> GetHandlers(DataModel.Product entity)
-		{
-			return new List<EventHandlerBase>()
+		protected override IList<EventHandlerBase> GetHandlers(DataModel.Product entity) => new List<EventHandlerBase>()
 			{
 				new ProductSizeChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }),
 				new ProductNameChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }),
@@ -29,7 +28,6 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 				new ProductColorChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }),
 				new ProductTagAddChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }, UnitOfWork),
 			};
-		}
 
 		protected override EventResult SaveChanges(DataModel.Product entity)
 		{

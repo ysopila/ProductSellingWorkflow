@@ -2,6 +2,7 @@
 using ProductSellingWorkflow.Service.Events;
 using System.Linq;
 using ProductSellingWorkflow.Common.Enums;
+using ProductSellingWorkflow.Service.Events.Product.Properties;
 
 namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties
 {

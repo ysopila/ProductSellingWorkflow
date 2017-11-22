@@ -1,6 +1,6 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 
-namespace ProductSellingWorkflow.Service.Events
+namespace ProductSellingWorkflow.Service.Events.Product.Properties
 {
 	public class ProductStateChange : PropertyChangeEvent<ProductState>
 	{

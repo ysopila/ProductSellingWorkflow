@@ -1,6 +1,7 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Service.Events;
+using ProductSellingWorkflow.Service.Events.Product.Properties;
 using System.Linq;
 
 namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties

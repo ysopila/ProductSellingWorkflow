@@ -1,6 +1,7 @@
 ﻿using ProductSellingWorkflow.Models;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
+using ProductSellingWorkflow.Service.Events.Product;
 using System.Linq;
 using System.Web.Mvc;
 

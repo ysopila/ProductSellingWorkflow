@@ -2,6 +2,7 @@
 using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Service.EventHandlers.Product.Properties;
 using ProductSellingWorkflow.Service.Events;
+using ProductSellingWorkflow.Service.Events.Product;
 using System.Collections.Generic;
 using System.Linq;
 

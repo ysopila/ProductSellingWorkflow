@@ -1,4 +1,5 @@
 ﻿using ProductSellingWorkflow.Service.Events;
+using ProductSellingWorkflow.Service.Events.Product.Properties;
 
 namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties
 {
