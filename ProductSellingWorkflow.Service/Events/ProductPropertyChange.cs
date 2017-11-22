@@ -1,38 +1,21 @@
-﻿using ProductSellingWorkflow.Common.Enums;
-using ProductSellingWorkflow.DataModel;
-using System;
-
-namespace ProductSellingWorkflow.Service.Events
+﻿namespace ProductSellingWorkflow.Service.Events
 {
-	public abstract class ProductPropertyChange<T> : ProductEvent
+	public class PropertyChangeEvent: EventBase
 	{
-		public ProductPropertyChange(T value, ProductLogType type, Guid operationId)
+		public PropertyChangeEvent(object value)
 		{
 			Value = value;
-			Type = type;
-			OperationId = operationId;
 		}
 
-		protected virtual ProductLog CreateLog(Product product, string property, string value)
+		internal object Value { get; }
+	}
+
+	public class PropertyChangeEvent<T> : PropertyChangeEvent
+	{
+		public PropertyChangeEvent(T value): base(value)
 		{
-			var log = new ProductLog
-			{
-				CreatedAt = DateTimeOffset.UtcNow,
-				Operation = Operation,
-				OperationId = OperationId,
-				Property = property,
-				Type = Type,
-				Value = value,
-				ProductId = product.Id
-			};
-			product.ProductLogs.Add(log);
-			return log;
 		}
 
-		protected virtual ProductLogOperation Operation => ProductLogOperation.Set;
-
-		internal Guid OperationId { get; }
-		internal T Value { get; }
-		internal ProductLogType Type { get; }
+		internal new T Value => (T)base.Value;
 	}
 }

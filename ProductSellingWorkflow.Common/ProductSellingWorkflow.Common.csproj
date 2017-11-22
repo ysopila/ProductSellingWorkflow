@@ -44,7 +44,7 @@
     <Compile Include="Core\SimpleMapper.cs" />
     <Compile Include="Enums\ProductLogType.cs" />
     <Compile Include="Enums\ProductState.cs" />
-    <Compile Include="Enums\ProductLogOperation.cs" />
+    <Compile Include="Enums\LogOperation.cs" />
     <Compile Include="Exceptions\MapperNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

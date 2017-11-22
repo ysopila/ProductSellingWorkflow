@@ -2,8 +2,8 @@
 {
 	public enum ProductLogType
 	{
-		Create = 1,
-		Modify = 2,
-		StateChange = 3,
+		Set = 1,
+		Add = 2,
+		Remove = 3
 	}
 }

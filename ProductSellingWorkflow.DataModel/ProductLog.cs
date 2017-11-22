@@ -12,7 +12,7 @@ namespace ProductSellingWorkflow.DataModel
 		public Product Product { get; set; }
 
 		public ProductLogType Type { get; set; }
-		public ProductLogOperation Operation { get; set; }
+		public LogOperation Operation { get; set; }
 		public string Property { get; set; }
 		public string Value { get; set; }
 		public DateTimeOffset CreatedAt { get; set; }

@@ -6,6 +6,8 @@ using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
 using System.Collections.Generic;
 using System.Linq;
+using ProductSellingWorkflow.Service.EventHandlers.Product;
+using ProductSellingWorkflow.Service.EventHandlers;
 
 namespace ProductSellingWorkflow.Service.Implementations
 {
@@ -33,36 +35,12 @@ namespace ProductSellingWorkflow.Service.Implementations
 
 		public EventResult Create(CreateProductEvent @event)
 		{
-			var product = new Product();
-
-			var result = @event.Apply(product, true);
-			if (result.Success)
-			{
-				_unitOfWork.ProductRepository.Insert(product);
-				_unitOfWork.Save();
-			}
-			else
-			{
-				_unitOfWork.Rollback();
-			}
-			return result;
+			return new CreateProductEventHandler(_unitOfWork).Apply(@event, new EventOptions { Store = true });
 		}
 
 		public EventResult Update(UpdateProductEvent @event)
 		{
-			var product = _unitOfWork.ProductRepository.Find(x => x.Id == @event.Id, noTracking: false).FirstOrDefault();
-
-			var result = @event.Apply(product, true);
-			if (result.Success)
-			{
-				_unitOfWork.ProductRepository.Update(product);
-				_unitOfWork.Save();
-			}
-			else
-			{
-				_unitOfWork.Rollback();
-			}
-			return result;
+			return new UpdateProductEventHandler(_unitOfWork).Apply(@event, new EventOptions { Store = true });
 		}
 	}
 }

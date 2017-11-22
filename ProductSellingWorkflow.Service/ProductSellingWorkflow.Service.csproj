@@ -42,6 +42,18 @@
   <ItemGroup>
     <Compile Include="Abstractions\ITagService.cs" />
     <Compile Include="Abstractions\IProductService.cs" />
+    <Compile Include="EventHandlers\EventHandlerBase.cs" />
+    <Compile Include="EventHandlers\ComplexEventHandler.cs" />
+    <Compile Include="EventHandlers\Product\UpdateProductEventHandler.cs" />
+    <Compile Include="EventHandlers\Product\CreateProductEventHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductTagRemoveChangeHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductTagAddChangeHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductStateChangeHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductColorChangeHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductDescriptionChangeHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductPropertyHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductNameChangeHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductSizeChangeHandler.cs" />
     <Compile Include="Events\BuyEvent.cs" />
     <Compile Include="Events\ComplexProductEvent.cs" />
     <Compile Include="Events\CreateProductEvent.cs" />
@@ -83,6 +95,7 @@
       <Name>ProductSellingWorkflow.Repository</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
