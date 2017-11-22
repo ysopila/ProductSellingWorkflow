@@ -20,7 +20,7 @@ namespace ProductSellingWorkflow.DataModel
 		public ProductState State { get; set; }
 
 		public int CreatedById { get; set; }
-		public User UserCreator { get; set; }
+		public User CreatedBy { get; set; }
 
 		public ICollection<ProductLog> ProductLogs { get; set; }
 		public ICollection<ProductTag> ProductTags { get; set; }

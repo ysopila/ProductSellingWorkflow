@@ -14,12 +14,12 @@ namespace ProductSellingWorkflow.Data.Configuration
 				.HasForeignKey(x => x.UserId);
 
 			HasMany(x => x.Products)
-				.WithRequired(x => x.UserCreator)
+				.WithRequired(x => x.CreatedBy)
 				.HasForeignKey(x => x.CreatedById)
 				.WillCascadeOnDelete(false);
 
 			HasMany(x => x.ProductLogs)
-				.WithRequired(x => x.UserCreator)
+				.WithRequired(x => x.CreatedBy)
 				.HasForeignKey(x => x.CreatedById);
 		}
 	}

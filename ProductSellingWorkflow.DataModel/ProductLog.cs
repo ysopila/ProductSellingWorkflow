@@ -18,6 +18,6 @@ namespace ProductSellingWorkflow.DataModel
 		public DateTimeOffset CreatedAt { get; set; }
 
 		public int CreatedById { get; set; }
-		public User UserCreator { get; set; }
+		public User CreatedBy { get; set; }
 	}
 }
