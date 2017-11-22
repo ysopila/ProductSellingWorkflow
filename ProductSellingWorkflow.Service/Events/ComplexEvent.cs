@@ -30,7 +30,7 @@ namespace ProductSellingWorkflow.Service.Events
 
 		protected void SetEventCollection(string key, IEnumerable<PropertyChangeEvent> e)
 		{
-			foreach (var x in Events.Keys.Where(x => x.StartsWith(key)))
+			foreach (var x in Events.Keys.Where(x => x.StartsWith(key)).ToList())
 				Events.Remove(x);
 			if (e != null && e.Any())
 			{
