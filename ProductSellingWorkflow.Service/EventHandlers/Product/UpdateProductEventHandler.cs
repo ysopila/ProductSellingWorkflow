@@ -1,5 +1,6 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 using ProductSellingWorkflow.Repository.Abstractions;
+using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.EventHandlers.Product.Properties;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
@@ -10,7 +11,7 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 {
 	public class UpdateProductEventHandler : CreateProductEventHandler
 	{
-		public UpdateProductEventHandler(IUnitOfWork unitOfWork) : base(unitOfWork)
+		public UpdateProductEventHandler(IUnitOfWork unitOfWork, IAuthenticationService authService) : base(unitOfWork, authService)
 		{
 		}
 

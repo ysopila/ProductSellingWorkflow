@@ -23,7 +23,8 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product.Properties
 				Property = property,
 				Type = Type,
 				Value = value,
-				ProductId = Entity.Id
+				ProductId = Entity.Id,
+				CreatedById = Context.CurrentUser.Id
 			};
 			Entity.ProductLogs.Add(log);
 			return log;

@@ -10,7 +10,7 @@
 <br />
 @using (Html.BeginForm("Create", "Product", null, FormMethod.Post, new { @class = "form-horizontal" }))
 {
-    @Html.ValidationSummary(false)
+    @Html.ValidationSummary(false, String.Empty, new { @class = "text-danger" })
 
     <div class="form-group">
         <label class="col-sm-2 control-label"><span class="text-danger">*</span>&nbsp;<span>@Html.DisplayNameFor(x => x.Name)</span></label>

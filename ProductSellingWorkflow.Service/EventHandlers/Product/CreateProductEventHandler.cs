@@ -1,5 +1,6 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
 using ProductSellingWorkflow.Repository.Abstractions;
+using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.EventHandlers.Product.Properties;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
@@ -9,7 +10,7 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 {
 	public class CreateProductEventHandler : ComplexEventHandler<CreateProductEvent, DataModel.Product>
 	{
-		public CreateProductEventHandler(IUnitOfWork unitOfWork) : base(unitOfWork)
+		public CreateProductEventHandler(IUnitOfWork unitOfWork, IAuthenticationService authService) : base(unitOfWork, authService)
 		{
 		}
 
@@ -17,7 +18,7 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 
 		protected override DataModel.Product GetEntity(CreateProductEvent e)
 		{
-			return new DataModel.Product { };
+			return new DataModel.Product { CreatedById = AuthenticationService.CurrentUser.Id };
 		}
 
 		protected override IList<EventHandlerBase> GetHandlers(DataModel.Product entity) => new List<EventHandlerBase>()

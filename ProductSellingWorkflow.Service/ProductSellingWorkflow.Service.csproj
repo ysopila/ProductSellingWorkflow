@@ -43,6 +43,7 @@
     <Compile Include="Abstractions\IAuthenticationService.cs" />
     <Compile Include="Abstractions\ITagService.cs" />
     <Compile Include="Abstractions\IProductService.cs" />
+    <Compile Include="Abstractions\IUserService.cs" />
     <Compile Include="EventHandlers\EventHandlerBase.cs" />
     <Compile Include="EventHandlers\ComplexEventHandler.cs" />
     <Compile Include="EventHandlers\Product\Properties\ProductPriceChangeHandler.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Events\Product\UpdateProductEvent.cs" />
     <Compile Include="Implementations\TagService.cs" />
     <Compile Include="Implementations\ProductService.cs" />
+    <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\TagDTO.cs" />

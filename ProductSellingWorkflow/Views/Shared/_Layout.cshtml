@@ -10,6 +10,14 @@
 <body>
 
     <div class="container">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p class="clearfix text-right">
+                <span>Hello @User.Identity.Name</span>&nbsp;
+                @Html.ActionLink("Log out", "Logout", "Account", null, new { @class = "btn btn-warning btn-sm" })
+            </p>
+        }
+
         @RenderBody()
     </div>
 

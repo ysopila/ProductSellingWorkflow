@@ -13,5 +13,7 @@ namespace ProductSellingWorkflow.Repository.Abstractions
 		IRepository<ProductLog> ProductLogRepository { get; }
 		IRepository<ProductTag> ProductTagRepository { get; }
 		IRepository<Tag> TagRepository { get; }
+		IUserRepository UserRepository { get; }
+		IRepository<Role> RoleRepository { get; }
 	}
 }

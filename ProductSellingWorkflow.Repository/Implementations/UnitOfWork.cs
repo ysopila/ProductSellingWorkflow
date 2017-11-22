@@ -2,8 +2,8 @@
 using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
 using System;
-using System.Linq;
 using System.Data.Entity;
+using System.Linq;
 
 namespace ProductSellingWorkflow.Repository.Implementations
 {
@@ -14,6 +14,8 @@ namespace ProductSellingWorkflow.Repository.Implementations
 		private IRepository<ProductLog> _productLogRepository;
 		private IRepository<ProductTag> _productTagRepository;
 		private IRepository<Tag> _tagRepository;
+		private IUserRepository _userRepository;
+		private IRepository<Role> _roleRepository;
 
 		private IDbContext Context
 		{
@@ -38,6 +40,16 @@ namespace ProductSellingWorkflow.Repository.Implementations
 		public IRepository<Tag> TagRepository
 		{
 			get { return _tagRepository ?? (_tagRepository = new Repository<Tag>(Context)); }
+		}
+
+		public IUserRepository UserRepository
+		{
+			get { return _userRepository ?? (_userRepository = new UserRepository(Context)); }
+		}
+
+		public IRepository<Role> RoleRepository
+		{
+			get { return _roleRepository ?? (_roleRepository = new Repository<Role>(Context)); }
 		}
 
 		public void Save()

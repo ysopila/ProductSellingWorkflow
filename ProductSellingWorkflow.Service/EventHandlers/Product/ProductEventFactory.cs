@@ -1,4 +1,5 @@
 ﻿using ProductSellingWorkflow.Repository.Abstractions;
+using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
 using System;
@@ -12,17 +13,20 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 	public class ProductEventFactory : IProductEventFactory
 	{
 		private IUnitOfWork UnitOfWork { get; }
-		public ProductEventFactory(IUnitOfWork unitOfWork)
+		private IAuthenticationService AuthenticationService { get; }
+
+		public ProductEventFactory(IUnitOfWork unitOfWork, IAuthenticationService authService)
 		{
 			UnitOfWork = unitOfWork;
+			AuthenticationService = authService;
 		}
 
 		public EventHandlerBase GetHandler<T>() where T : EventBase
 		{
 			if (typeof(T) == typeof(UpdateProductEvent))
-				return new UpdateProductEventHandler(UnitOfWork);
+				return new UpdateProductEventHandler(UnitOfWork, AuthenticationService);
 			if (typeof(T) == typeof(CreateProductEvent))
-				return new CreateProductEventHandler(UnitOfWork);
+				return new CreateProductEventHandler(UnitOfWork, AuthenticationService);
 			throw new NotSupportedException("Type is not supported");
 		}
 	}

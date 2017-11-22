@@ -2,6 +2,7 @@
 
 namespace ProductSellingWorkflow.Controllers
 {
+	[Authorize]
 	public class MvcBaseController : Controller
 	{
 	}

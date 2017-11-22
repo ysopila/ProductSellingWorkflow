@@ -1,11 +1,8 @@
 ﻿using ProductSellingWorkflow.Common.Enums;
+using ProductSellingWorkflow.Data.Views;
 using ProductSellingWorkflow.Service.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProductSellingWorkflow.DataModel;
 
 namespace ProductSellingWorkflow.Service.EventHandlers
 {
@@ -14,7 +11,7 @@ namespace ProductSellingWorkflow.Service.EventHandlers
 		bool Store { get; }
 	}
 
-	public class EventOptions: IEventOptions
+	public class EventOptions : IEventOptions
 	{
 		public bool Store { get; set; }
 	}
@@ -85,5 +82,6 @@ namespace ProductSellingWorkflow.Service.EventHandlers
 	{
 		public Guid OperationId { get; set; }
 		public LogOperation Operation { get; set; }
+		public UserView CurrentUser { get; set; }
 	}
 }

@@ -4,8 +4,10 @@
 @{
     ViewBag.Title = "Product";
 }
-<p>@Html.ActionLink("Create", "Create", "Product", null, new { @class = "btn btn-success btn-sm" })</p>
-
+<h2>Products</h2>
+<p class="clearfix">
+    @Html.ActionLink("Create", "Create", "Product", null, new { @class = "btn btn-success btn-sm" })
+</p>
 <table class="table table-hover table-striped table-bordered">
     <thead>
         <tr>
