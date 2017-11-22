@@ -30,7 +30,7 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 		protected override IList<EventHandlerBase> GetHandlers(DataModel.Product entity)
 		{
 			var h = base.GetHandlers(entity);
-			h.Add(new ProductTagRemoveChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }, UnitOfWork));
+			h.Add(new ProductTagRemoveChangeHandler(entity, GetOperationContext(), UnitOfWork));
 			return h;
 		}
 

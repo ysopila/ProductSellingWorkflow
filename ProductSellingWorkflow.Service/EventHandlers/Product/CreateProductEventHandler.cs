@@ -22,11 +22,11 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 
 		protected override IList<EventHandlerBase> GetHandlers(DataModel.Product entity) => new List<EventHandlerBase>()
 			{
-				new ProductSizeChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }),
-				new ProductNameChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }),
-				new ProductDescriptionChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }),
-				new ProductColorChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }),
-				new ProductTagAddChangeHandler(entity, new OperationContext { Operation = Operation, OperationId = OperationId }, UnitOfWork),
+				new ProductSizeChangeHandler(entity, GetOperationContext()),
+				new ProductNameChangeHandler(entity, GetOperationContext()),
+				new ProductDescriptionChangeHandler(entity, GetOperationContext()),
+				new ProductColorChangeHandler(entity, GetOperationContext()),
+				new ProductTagAddChangeHandler(entity, GetOperationContext(), UnitOfWork),
 			};
 
 		protected override EventResult SaveChanges(DataModel.Product entity)
