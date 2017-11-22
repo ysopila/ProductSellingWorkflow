@@ -30,6 +30,12 @@ namespace ProductSellingWorkflow.Service.Events.Product
 			set => SetEvent(nameof(Size), new ProductSizeChange(value));
 		}
 
+		public decimal Price
+		{
+			get => GetEvent<ProductPriceChange>(nameof(Price)).Value;
+			set => SetEvent(nameof(Price), new ProductPriceChange(value));
+		}
+
 		public IEnumerable<string> AddedTags
 		{
 			get => GetEventCollection<ProductTagAdd>(nameof(AddedTags))?.Select(x => x.Value);

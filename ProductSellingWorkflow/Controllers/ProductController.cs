@@ -36,13 +36,15 @@ namespace ProductSellingWorkflow.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var @event = new CreateProductEvent {
+				var @event = new CreateProductEvent
+				{
 					AddedTags = model.TagsList
 				};
 				if (!string.Equals(model.Name, null)) @event.Name = model.Name;
 				if (!string.Equals(model.Description, null)) @event.Description = model.Description;
 				if (!string.Equals(model.Color, null)) @event.Color = model.Color;
 				if (!string.Equals(model.Size, null)) @event.Size = model.Size;
+				if (!decimal.Equals(model.Price, 0)) @event.Price = model.Price;
 
 				var result = _service.Create(@event);
 
@@ -76,6 +78,7 @@ namespace ProductSellingWorkflow.Controllers
 				if (!string.Equals(model.Description, model.Original.Description)) @event.Description = model.Description;
 				if (!string.Equals(model.Color, model.Original.Color)) @event.Color = model.Color;
 				if (!string.Equals(model.Size, model.Original.Size)) @event.Size = model.Size;
+				if (!decimal.Equals(model.Price, model.Original.Price)) @event.Price = model.Price;
 
 				var addedTags = model.TagsList?.Where(x => model.Original.Tags?.Contains(x) != true);
 				var removedTags = model.Original.Tags?.Where(x => model.TagsList?.Contains(x) != true);

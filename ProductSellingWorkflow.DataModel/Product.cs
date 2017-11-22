@@ -16,6 +16,7 @@ namespace ProductSellingWorkflow.DataModel
 		public string Description { get; set; }
 		public string Size { get; set; }
 		public string Color { get; set; }
+		public decimal Price { get; set; }
 		public ProductState State { get; set; }
 
 		public ICollection<ProductLog> ProductLogs { get; set; }

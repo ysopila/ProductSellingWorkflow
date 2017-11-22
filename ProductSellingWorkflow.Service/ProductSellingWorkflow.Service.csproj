@@ -44,6 +44,7 @@
     <Compile Include="Abstractions\IProductService.cs" />
     <Compile Include="EventHandlers\EventHandlerBase.cs" />
     <Compile Include="EventHandlers\ComplexEventHandler.cs" />
+    <Compile Include="EventHandlers\Product\Properties\ProductPriceChangeHandler.cs" />
     <Compile Include="EventHandlers\Product\UpdateProductEventHandler.cs" />
     <Compile Include="EventHandlers\Product\CreateProductEventHandler.cs" />
     <Compile Include="EventHandlers\Product\Properties\ProductTagRemoveChangeHandler.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Events\Product\CreateProductEvent.cs" />
     <Compile Include="Events\EventResult.cs" />
     <Compile Include="Events\Product\MoveInCatalogEvent.cs" />
+    <Compile Include="Events\Product\Properties\ProductPriceChange.cs" />
     <Compile Include="Events\Product\Properties\ProductTagsRemove.cs" />
     <Compile Include="Events\Product\Properties\ProductTagsAdd.cs" />
     <Compile Include="Events\Product\Properties\ProductSizeChange.cs" />
