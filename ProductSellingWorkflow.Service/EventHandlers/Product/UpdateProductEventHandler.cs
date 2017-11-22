@@ -16,6 +16,11 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 
 		protected override LogOperation Operation => LogOperation.Modify;
 
+		public override bool CanHandle(EventBase e)
+		{
+			return e is UpdateProductEvent;
+		}
+
 		protected override DataModel.Product GetEntity(CreateProductEvent e)
 		{
 			var u = (UpdateProductEvent)e;

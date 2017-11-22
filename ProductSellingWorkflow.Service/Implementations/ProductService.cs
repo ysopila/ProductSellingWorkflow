@@ -14,11 +14,13 @@ namespace ProductSellingWorkflow.Service.Implementations
 	{
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly ISimpleMapper _mapper;
+		private readonly IProductEventFactory _factory;
 
-		public ProductService(IUnitOfWork unitOfWork, ISimpleMapper mapper)
+		public ProductService(IUnitOfWork unitOfWork, ISimpleMapper mapper, IProductEventFactory factory)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
+			_factory = factory;
 		}
 
 		public ProductView Get(int id)
@@ -34,12 +36,12 @@ namespace ProductSellingWorkflow.Service.Implementations
 
 		public EventResult Create(CreateProductEvent @event)
 		{
-			return new CreateProductEventHandler(_unitOfWork).Apply(@event, new EventOptions { Store = true });
+			return _factory.GetHandler<CreateProductEvent>().Apply(@event, new EventOptions { Store = true });
 		}
 
 		public EventResult Update(UpdateProductEvent @event)
 		{
-			return new UpdateProductEventHandler(_unitOfWork).Apply(@event, new EventOptions { Store = true });
+			return _factory.GetHandler<UpdateProductEvent>().Apply(@event, new EventOptions { Store = true });
 		}
 	}
 }
