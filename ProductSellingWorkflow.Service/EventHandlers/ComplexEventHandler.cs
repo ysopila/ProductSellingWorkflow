@@ -16,6 +16,9 @@ namespace ProductSellingWorkflow.Service.EventHandlers
 		protected abstract EventResult SaveChanges(V entity);
 		protected abstract IList<EventHandlerBase> GetHandlers(V entity);
 
+		protected virtual OperationContext GetOperationContext() =>
+			new OperationContext { Operation = Operation, OperationId = OperationId };
+
 		protected virtual EventResult ApplyChanges(V entity, T e, IEventOptions options)
 		{
 			var result = new EventResult();
