@@ -2,12 +2,14 @@
 @model IEnumerable<ProductView>
 
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "My Products";
 }
-<h2>Products</h2>
+<h2>My Products</h2>
+
 <p class="clearfix">
     @Html.ActionLink("Create", "Create", "Product", null, new { @class = "btn btn-success btn-sm" })
 </p>
+
 <table class="table table-hover table-striped table-bordered">
     <thead>
         <tr>
@@ -32,7 +34,7 @@
                 <td>@item.Size</td>
                 <td>@item.Color</td>
                 <td>@item.Price</td>
-                <td>@item.State</td>
+                <td class="text-info">@item.State</td>
                 <td>@string.Join(", ", item.Tags)</td>
                 <td>@item.CreatedAt.ToString("dd MMM yyyy HH:mm:ss")</td>
                 <td>@item.ModifiedAt.ToString("dd MMM yyyy HH:mm:ss")</td>

@@ -1,4 +1,5 @@
-﻿using ProductSellingWorkflow.Models;
+﻿using ProductSellingWorkflow.Common.Core;
+using ProductSellingWorkflow.Models;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
@@ -10,20 +11,69 @@ namespace ProductSellingWorkflow.Controllers
 	public class ProductController : MvcBaseController
 	{
 		private readonly IProductService _service;
+		private readonly IAuthenticationService _authService;
 		private readonly ITagService _serviceTags;
 
-		public ProductController(IProductService service, ITagService serviceTags)
+		public ProductController(IProductService service, ITagService serviceTags, IAuthenticationService authService)
 		{
 			_service = service;
 			_serviceTags = serviceTags;
+			_authService = authService;
 		}
 
 		public ActionResult Index()
 		{
-			var data = _service.GetAll();
+			if (User.IsInRole(Roles.Admin))
+				return RedirectToAction("Admin");
+			else if (User.IsInRole(Roles.Seller))
+				return RedirectToAction("Owner");
 
+			return RedirectToAction("Catalog");
+		}
+
+		#region Admin
+
+		[Authorize(Roles = Roles.Admin)]
+		public ActionResult Admin()
+		{
+			var data = _service.GetAllForAdmin();
+			return View(data);
+
+		}
+
+		#endregion
+
+		#region Seller
+
+		[Authorize(Roles = Roles.Seller)]
+		public ActionResult Owner()
+		{
+			var userId = _authService.CurrentUser.Id;
+			var data = _service.GetAllForOwner(userId);
+			return View(data);
+
+		}
+
+		#endregion
+
+		#region Buyer
+
+		public ActionResult Catalog()
+		{
+			var data = _service.GetAll();
 			return View(data);
 		}
+
+		[HttpGet]
+		public ActionResult MoveToCatalog(int id)
+		{
+			var @event = new MoveInCatalogEvent(id);
+			var result = _service.Update(@event);
+
+			return RedirectToAction("Index", "Product");
+		}
+
+		#endregion
 
 		[HttpGet]
 		public ActionResult Create()

@@ -2,8 +2,8 @@
 {
 	public enum ProductState
 	{
-		UnProcessed = 1,
-		InCatalog = 2,
-		Sold = 3
+		UnProcessed = 0,
+		InCatalog = 1,
+		Sold = 2
 	}
 }

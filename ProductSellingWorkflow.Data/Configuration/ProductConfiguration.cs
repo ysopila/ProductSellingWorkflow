@@ -16,6 +16,10 @@ namespace ProductSellingWorkflow.Data.Configuration
 			HasMany(x => x.ProductTags)
 				.WithRequired(x => x.Product)
 				.HasForeignKey(x => x.ProductId);
+
+			HasMany(x => x.WatchList)
+				.WithRequired(x => x.Product)
+				.HasForeignKey(x => x.ProductId);
 		}
 	}
 }

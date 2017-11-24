@@ -27,6 +27,7 @@ namespace ProductSellingWorkflow.Data
 			modelBuilder.Configurations.Add(new RoleConfiguration());
 			modelBuilder.Configurations.Add(new UserConfiguration());
 			modelBuilder.Configurations.Add(new UserInRoleConfiguration());
+			modelBuilder.Configurations.Add(new WatchListConfiguration());
 		}
 	}
 

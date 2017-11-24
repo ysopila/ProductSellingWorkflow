@@ -48,6 +48,7 @@
     <Compile Include="EventHandlers\EventHandlerBase.cs" />
     <Compile Include="EventHandlers\ComplexEventHandler.cs" />
     <Compile Include="EventHandlers\Product\Properties\ProductPriceChangeHandler.cs" />
+    <Compile Include="EventHandlers\Product\MoveInCatalogEventHandler.cs" />
     <Compile Include="EventHandlers\Product\UpdateProductEventHandler.cs" />
     <Compile Include="EventHandlers\Product\CreateProductEventHandler.cs" />
     <Compile Include="EventHandlers\Product\Properties\ProductTagRemoveChangeHandler.cs" />

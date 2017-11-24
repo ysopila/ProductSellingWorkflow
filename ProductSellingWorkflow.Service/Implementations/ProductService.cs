@@ -1,12 +1,12 @@
 ﻿using ProductSellingWorkflow.Common.Core;
-using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Data.Views;
+using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Service.Abstractions;
-using ProductSellingWorkflow.Service.Events;
-using System.Collections.Generic;
-using ProductSellingWorkflow.Service.EventHandlers.Product;
 using ProductSellingWorkflow.Service.EventHandlers;
+using ProductSellingWorkflow.Service.EventHandlers.Product;
+using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
+using System.Collections.Generic;
 
 namespace ProductSellingWorkflow.Service.Implementations
 {
@@ -29,9 +29,19 @@ namespace ProductSellingWorkflow.Service.Implementations
 			return product;
 		}
 
-		public IEnumerable<ProductView> GetAll()
+		public IEnumerable<ProductBaseView> GetAll()
 		{
-			return _unitOfWork.ProductRepository.GetAll();
+			return _unitOfWork.ProductRepository.GetCatalog();
+		}
+
+		public IEnumerable<ProductView> GetAllForAdmin()
+		{
+			return _unitOfWork.ProductRepository.GetAllForAdmin();
+		}
+
+		public IEnumerable<ProductView> GetAllForOwner(int ownerId)
+		{
+			return _unitOfWork.ProductRepository.GetAllForOwner(ownerId);
 		}
 
 		public EventResult Create(CreateProductEvent @event)
@@ -42,6 +52,11 @@ namespace ProductSellingWorkflow.Service.Implementations
 		public EventResult Update(UpdateProductEvent @event)
 		{
 			return _factory.GetHandler<UpdateProductEvent>().Apply(@event, new EventOptions { Store = true });
+		}
+
+		public EventResult Update(MoveInCatalogEvent @event)
+		{
+			return _factory.GetHandler<MoveInCatalogEvent>().Apply(@event, new EventOptions { Store = true });
 		}
 	}
 }

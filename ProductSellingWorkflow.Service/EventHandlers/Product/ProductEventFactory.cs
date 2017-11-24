@@ -27,6 +27,8 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 				return new UpdateProductEventHandler(UnitOfWork, AuthenticationService);
 			if (typeof(T) == typeof(CreateProductEvent))
 				return new CreateProductEventHandler(UnitOfWork, AuthenticationService);
+			if (typeof(T) == typeof(MoveInCatalogEvent))
+				return new MoveInCatalogEventHandler(UnitOfWork, AuthenticationService);
 			throw new NotSupportedException("Type is not supported");
 		}
 	}

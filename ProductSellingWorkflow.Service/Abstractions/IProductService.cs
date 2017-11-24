@@ -8,8 +8,12 @@ namespace ProductSellingWorkflow.Service.Abstractions
 	public interface IProductService
 	{
 		ProductView Get(int id);
-		IEnumerable<ProductView> GetAll();
+		IEnumerable<ProductBaseView> GetAll();
+		IEnumerable<ProductView> GetAllForAdmin();
+		IEnumerable<ProductView> GetAllForOwner(int ownerId);
+
 		EventResult Create(CreateProductEvent @event);
 		EventResult Update(UpdateProductEvent @event);
+		EventResult Update(MoveInCatalogEvent @event);
 	}
 }

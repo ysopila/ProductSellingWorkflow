@@ -9,6 +9,7 @@ namespace ProductSellingWorkflow.DataModel
 		{
 			ProductLogs = new List<ProductLog>();
 			ProductTags = new List<ProductTag>();
+			WatchList = new List<WatchList>();
 		}
 
 		public int Id { get; set; }
@@ -24,5 +25,6 @@ namespace ProductSellingWorkflow.DataModel
 
 		public ICollection<ProductLog> ProductLogs { get; set; }
 		public ICollection<ProductTag> ProductTags { get; set; }
+		public ICollection<WatchList> WatchList { get; set; }
 	}
 }

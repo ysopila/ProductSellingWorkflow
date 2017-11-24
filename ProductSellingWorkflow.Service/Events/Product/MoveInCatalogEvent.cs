@@ -5,8 +5,12 @@ namespace ProductSellingWorkflow.Service.Events.Product
 {
 	public class MoveInCatalogEvent : ComplexEvent
 	{
-		public MoveInCatalogEvent()
+		public int Id { get; }
+
+		public MoveInCatalogEvent(int id)
 		{
+			Id = id;
+
 			Events.Add("State", new ProductStateChange(ProductState.InCatalog));
 		}
 	}

@@ -1,0 +1,43 @@
+﻿@using ProductSellingWorkflow.Data.Views
+@model IEnumerable<ProductView>
+
+@{
+    ViewBag.Title = "Unprocessed Queue";
+}
+<h2>Unprocessed Queue</h2>
+
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Size</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>State</th>
+            <th>Tags</th>
+            <th>Created By</th>
+            <th>Created At</th>
+            <th>Modified At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Size</td>
+                <td>@item.Color</td>
+                <td>@item.Price</td>
+                <td class="text-info">@item.State</td>
+                <td>@string.Join(", ", item.Tags)</td>
+                <td>@item.CreatedBy.Name</td>
+                <td>@item.CreatedAt.ToString("dd MMM yyyy HH:mm:ss")</td>
+                <td>@item.ModifiedAt.ToString("dd MMM yyyy HH:mm:ss")</td>
+                <td>@Html.ActionLink("Move to catalog", "MoveToCatalog", "Product", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })</td>
+            </tr>
+        }
+    </tbody>
+</table>

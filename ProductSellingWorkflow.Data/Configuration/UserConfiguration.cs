@@ -21,6 +21,10 @@ namespace ProductSellingWorkflow.Data.Configuration
 			HasMany(x => x.ProductLogs)
 				.WithRequired(x => x.CreatedBy)
 				.HasForeignKey(x => x.CreatedById);
+
+			HasMany(x => x.WatchList)
+				.WithRequired(x => x.User)
+				.HasForeignKey(x => x.UserId);
 		}
 	}
 }

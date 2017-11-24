@@ -9,15 +9,36 @@
 </head>
 <body>
 
-    <div class="container">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <p class="clearfix text-right">
-                <span>Hello @User.Identity.Name</span>&nbsp;
-                @Html.ActionLink("Log out", "Logout", "Account", null, new { @class = "btn btn-warning btn-sm" })
-            </p>
-        }
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p class="navbar-text">Signed in as <a href="#" class="navbar-link">@User.Identity.Name</a></p>
+                    @Html.ActionLink("Log out", "Logout", "Account", null, new { @class = "btn btn-warning navbar-btn pull-right" })
+                }
+                else
+                {
+                    <div class="pull-right">
+                        @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-default navbar-btn" })
+                        @Html.ActionLink("Signup", "Signup", "Account", null, new { @class = "btn btn-default navbar-btn" })
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
 
+    <div class="container">
         @RenderBody()
     </div>
 

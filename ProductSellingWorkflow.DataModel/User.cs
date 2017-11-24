@@ -8,6 +8,7 @@ namespace ProductSellingWorkflow.DataModel
 		{
 			Roles = new List<UserInRole>();
 			Products = new List<Product>();
+			WatchList = new List<WatchList>();
 			ProductLogs = new List<ProductLog>();
 		}
 
@@ -19,6 +20,7 @@ namespace ProductSellingWorkflow.DataModel
 		public ICollection<UserInRole> Roles { get; set; }
 		public ICollection<Product> Products { get; set; }
 		public ICollection<ProductLog> ProductLogs { get; set; }
+		public ICollection<WatchList> WatchList { get; set; }
 
 	}
 }

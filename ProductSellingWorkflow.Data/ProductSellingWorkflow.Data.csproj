@@ -52,6 +52,7 @@
     <Compile Include="Configuration\ProductLogConfiguration.cs" />
     <Compile Include="Configuration\RoleConfiguration.cs" />
     <Compile Include="Configuration\UserConfiguration.cs" />
+    <Compile Include="Configuration\WatchListConfiguration.cs" />
     <Compile Include="Configuration\UserInRoleConfiguration.cs" />
     <Compile Include="Configuration\TagConfiguration.cs" />
     <Compile Include="Configuration\ProductTagConfiguration.cs" />
@@ -77,6 +78,10 @@
     <Compile Include="Migrations\201711221424377_AddUsersAndRoles.cs" />
     <Compile Include="Migrations\201711221424377_AddUsersAndRoles.Designer.cs">
       <DependentUpon>201711221424377_AddUsersAndRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711231554156_AddWatchList.cs" />
+    <Compile Include="Migrations\201711231554156_AddWatchList.Designer.cs">
+      <DependentUpon>201711231554156_AddWatchList.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711221424377_AddUsersAndRoles.resx">
       <DependentUpon>201711221424377_AddUsersAndRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711231554156_AddWatchList.resx">
+      <DependentUpon>201711231554156_AddWatchList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

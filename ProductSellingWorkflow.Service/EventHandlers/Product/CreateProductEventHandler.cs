@@ -18,7 +18,7 @@ namespace ProductSellingWorkflow.Service.EventHandlers.Product
 
 		protected override DataModel.Product GetEntity(CreateProductEvent e)
 		{
-			return new DataModel.Product { CreatedById = AuthenticationService.CurrentUser.Id };
+			return new DataModel.Product { CreatedById = AuthenticationService.CurrentUser.Id, State = ProductState.UnProcessed };
 		}
 
 		protected override IList<EventHandlerBase> GetHandlers(DataModel.Product entity) => new List<EventHandlerBase>()
