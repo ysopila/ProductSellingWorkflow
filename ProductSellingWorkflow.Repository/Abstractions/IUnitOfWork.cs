@@ -10,7 +10,7 @@ namespace ProductSellingWorkflow.Repository.Abstractions
 		void Recycle();
 
 		IProductRepository ProductRepository { get; }
-		IRepository<WatchList> WatchListRepository { get; }
+		IWatchListRepository WatchListRepository { get; }
 		IRepository<ProductLog> ProductLogRepository { get; }
 		IRepository<ProductTag> ProductTagRepository { get; }
 		IRepository<Tag> TagRepository { get; }

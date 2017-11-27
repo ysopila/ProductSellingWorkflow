@@ -49,10 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IWatchListRepository.cs" />
     <Compile Include="Abstractions\IUserRepository.cs" />
     <Compile Include="Abstractions\IProductRepository.cs" />
     <Compile Include="Abstractions\IUnitOfWork.cs" />
     <Compile Include="Abstractions\IRepository.cs" />
+    <Compile Include="Implementations\WatchListRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
     <Compile Include="Implementations\ProductRepository.cs" />
     <Compile Include="Implementations\Repository.cs" />
