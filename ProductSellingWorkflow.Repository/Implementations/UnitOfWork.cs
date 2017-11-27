@@ -16,6 +16,7 @@ namespace ProductSellingWorkflow.Repository.Implementations
 		private IRepository<Tag> _tagRepository;
 		private IUserRepository _userRepository;
 		private IRepository<Role> _roleRepository;
+		private IRepository<WatchList> _watchListRepository;
 
 		private IDbContext Context
 		{
@@ -50,6 +51,11 @@ namespace ProductSellingWorkflow.Repository.Implementations
 		public IRepository<Role> RoleRepository
 		{
 			get { return _roleRepository ?? (_roleRepository = new Repository<Role>(Context)); }
+		}
+
+		public IRepository<WatchList> WatchListRepository
+		{
+			get { return _watchListRepository ?? (_watchListRepository = new Repository<WatchList>(Context)); }
 		}
 
 		public void Save()

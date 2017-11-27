@@ -38,7 +38,6 @@ namespace ProductSellingWorkflow.Controllers
 		{
 			var data = _service.GetAllForAdmin();
 			return View(data);
-
 		}
 
 		#endregion
@@ -51,7 +50,6 @@ namespace ProductSellingWorkflow.Controllers
 			var userId = _authService.CurrentUser.Id;
 			var data = _service.GetAllForOwner(userId);
 			return View(data);
-
 		}
 
 		#endregion
@@ -61,7 +59,33 @@ namespace ProductSellingWorkflow.Controllers
 		public ActionResult Catalog()
 		{
 			var data = _service.GetAll();
-			return View(data);
+			var user = _authService.CurrentUser;
+
+			var viewModel = new CatalogViewModel
+			{
+				CurrentUser = user,
+				Products = data
+			};
+
+			return View(viewModel);
+		}
+
+		#endregion
+
+		[HttpGet]
+		public ActionResult AddToWatchList(int id)
+		{
+			var userId = _authService.CurrentUser.Id;
+			_service.AddToWatchList(id, userId);
+			return RedirectToAction("Index", "Product");
+		}
+
+		[HttpGet]
+		public ActionResult RemoveFromWatchList(int id)
+		{
+			var userId = _authService.CurrentUser.Id;
+			_service.RemoveFromWatchList(id, userId);
+			return RedirectToAction("Index", "Product");
 		}
 
 		[HttpGet]
@@ -73,7 +97,6 @@ namespace ProductSellingWorkflow.Controllers
 			return RedirectToAction("Index", "Product");
 		}
 
-		#endregion
 
 		[HttpGet]
 		public ActionResult Create()

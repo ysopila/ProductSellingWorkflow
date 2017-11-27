@@ -18,7 +18,8 @@ namespace ProductSellingWorkflow.Repository.Implementations
 				Name = x.Name,
 				Email = x.Email,
 				Password = x.Password,
-				Roles = x.Roles.Select(s => s.Role.Name)
+				Roles = x.Roles.Select(s => s.Role.Name),
+				WatchList = x.WatchList.Select(s => new WatchListView { ProductId = s.ProductId })
 			})
 			.FirstOrDefault();
 

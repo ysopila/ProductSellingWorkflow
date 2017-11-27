@@ -1,5 +1,5 @@
-﻿@using ProductSellingWorkflow.Data.Views
-@model IEnumerable<ProductBaseView>
+﻿@using ProductSellingWorkflow.Models
+@model CatalogViewModel
 
 @{
     ViewBag.Title = "Catalog";
@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Products)
         {
             <tr>
                 <td>@item.Name</td>
@@ -32,7 +32,14 @@
                 <td>@string.Join(", ", item.Tags)</td>
                 <td>@item.CreatedAt.ToString("dd MMM yyyy HH:mm:ss")</td>
                 <td>@item.ModifiedAt.ToString("dd MMM yyyy HH:mm:ss")</td>
-                <td>--</td>
+                @if (Model.IsInWatchlist(item.Id))
+                {
+                    <td>@Html.ActionLink("Remove from Watch list", "RemoveFromWatchList", "Product", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })</td>
+                }
+                else
+                {
+                    <td>@Html.ActionLink("Add to Watch list", "AddToWatchList", "Product", new { id = item.Id }, new { @class = "btn btn-success btn-sm" })</td>
+                }
             </tr>
         }
     </tbody>

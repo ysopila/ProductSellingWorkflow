@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleView.cs" />
     <Compile Include="UserView.cs" />
+    <Compile Include="WatchListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProductSellingWorkflow.Common\ProductSellingWorkflow.Common.csproj">

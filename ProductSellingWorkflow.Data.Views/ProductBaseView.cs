@@ -15,6 +15,7 @@ namespace ProductSellingWorkflow.Data.Views
 		public IEnumerable<string> Tags { get; set; }
 		public DateTimeOffset CreatedAt { get; set; }
 		public DateTimeOffset ModifiedAt { get; set; }
+		public bool IsInWatchlist { get; set; }
 
 		public string[] TagsArray
 		{

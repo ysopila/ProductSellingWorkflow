@@ -15,5 +15,8 @@ namespace ProductSellingWorkflow.Service.Abstractions
 		EventResult Create(CreateProductEvent @event);
 		EventResult Update(UpdateProductEvent @event);
 		EventResult Update(MoveInCatalogEvent @event);
+
+		void AddToWatchList(int id, int userId);
+		void RemoveFromWatchList(int id, int userId);
 	}
 }

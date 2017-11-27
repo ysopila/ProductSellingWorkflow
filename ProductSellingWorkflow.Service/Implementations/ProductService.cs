@@ -1,5 +1,6 @@
 ﻿using ProductSellingWorkflow.Common.Core;
 using ProductSellingWorkflow.Data.Views;
+using ProductSellingWorkflow.DataModel;
 using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.EventHandlers;
@@ -7,6 +8,7 @@ using ProductSellingWorkflow.Service.EventHandlers.Product;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProductSellingWorkflow.Service.Implementations
 {
@@ -25,8 +27,7 @@ namespace ProductSellingWorkflow.Service.Implementations
 
 		public ProductView Get(int id)
 		{
-			var product = _unitOfWork.ProductRepository.GetOne(id);
-			return product;
+			return _unitOfWork.ProductRepository.GetOne(id);
 		}
 
 		public IEnumerable<ProductBaseView> GetAll()
@@ -57,6 +58,30 @@ namespace ProductSellingWorkflow.Service.Implementations
 		public EventResult Update(MoveInCatalogEvent @event)
 		{
 			return _factory.GetHandler<MoveInCatalogEvent>().Apply(@event, new EventOptions { Store = true });
+		}
+
+		public void AddToWatchList(int id, int userId)
+		{
+			var watchList = _unitOfWork.WatchListRepository.Find(x => x.ProductId == id && x.UserId == userId, noTracking: false).FirstOrDefault();
+
+			if (watchList == null)
+			{
+				watchList = new WatchList { ProductId = id, UserId = userId };
+
+				_unitOfWork.WatchListRepository.Insert(watchList);
+				_unitOfWork.Save();
+			}
+		}
+
+		public void RemoveFromWatchList(int id, int userId)
+		{
+			var watchList = _unitOfWork.WatchListRepository.Find(x => x.ProductId == id && x.UserId == userId, noTracking: false).FirstOrDefault();
+
+			if (watchList != null)
+			{
+				_unitOfWork.WatchListRepository.Delete(watchList);
+				_unitOfWork.Save();
+			}
 		}
 	}
 }
