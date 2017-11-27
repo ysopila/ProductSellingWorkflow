@@ -68,5 +68,12 @@ namespace ProductSellingWorkflow.Service.Implementations
 
 			return true;
 		}
+
+		public IEnumerable<WatchListView> GetWatchList(int userId)
+		{
+			return _unitOfWork.WatchListRepository.Find(x => x.UserId == userId)
+				.Select(x => new WatchListView { ProductId = x.ProductId, UserId = x.UserId })
+				.ToList();
+		}
 	}
 }

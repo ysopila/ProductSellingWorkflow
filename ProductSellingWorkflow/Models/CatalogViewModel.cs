@@ -12,11 +12,11 @@ namespace ProductSellingWorkflow.Models
 		}
 
 		public IEnumerable<ProductBaseView> Products { get; set; }
-		public UserView CurrentUser { get; set; }
+		public IEnumerable<WatchListView> WatchList { get; set; }
 
 		public bool IsInWatchlist(int productId)
 		{
-			return CurrentUser.WatchList.Any(x => x.ProductId == productId);
+			return WatchList.Any(x => x.ProductId == productId);
 		}
 	}
 }

@@ -11,14 +11,16 @@ namespace ProductSellingWorkflow.Controllers
 	public class ProductController : MvcBaseController
 	{
 		private readonly IProductService _service;
+		private readonly IUserService _userService;
 		private readonly IAuthenticationService _authService;
 		private readonly ITagService _serviceTags;
 
-		public ProductController(IProductService service, ITagService serviceTags, IAuthenticationService authService)
+		public ProductController(IProductService service, ITagService serviceTags, IAuthenticationService authService, IUserService userService)
 		{
 			_service = service;
 			_serviceTags = serviceTags;
 			_authService = authService;
+			_userService = userService;
 		}
 
 		public ActionResult Index()
@@ -58,12 +60,13 @@ namespace ProductSellingWorkflow.Controllers
 
 		public ActionResult Catalog()
 		{
+			var userId = _authService.CurrentUser.Id;
 			var data = _service.GetAll();
-			var user = _authService.CurrentUser;
+			var watchList = _userService.GetWatchList(userId);
 
 			var viewModel = new CatalogViewModel
 			{
-				CurrentUser = user,
+				WatchList = watchList,
 				Products = data
 			};
 
