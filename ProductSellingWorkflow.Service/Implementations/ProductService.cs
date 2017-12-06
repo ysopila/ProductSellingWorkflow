@@ -7,6 +7,7 @@ using ProductSellingWorkflow.Service.EventHandlers;
 using ProductSellingWorkflow.Service.EventHandlers.Product;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
+using ProductSellingWorkflow.Service.NotificationHandlers;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,12 +18,14 @@ namespace ProductSellingWorkflow.Service.Implementations
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly ISimpleMapper _mapper;
 		private readonly IProductEventFactory _factory;
+		private readonly INotificationManager _notificationManager;
 
-		public ProductService(IUnitOfWork unitOfWork, ISimpleMapper mapper, IProductEventFactory factory)
+		public ProductService(IUnitOfWork unitOfWork, ISimpleMapper mapper, INotificationManager notificationManager, IProductEventFactory factory)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 			_factory = factory;
+			_notificationManager = notificationManager;
 		}
 
 		public ProductView Get(int id)
@@ -57,7 +60,11 @@ namespace ProductSellingWorkflow.Service.Implementations
 
 		public EventResult Update(MoveInCatalogEvent @event)
 		{
-			return _factory.GetHandler<MoveInCatalogEvent>().Apply(@event, new EventOptions { Store = true });
+			var result = _factory.GetHandler<MoveInCatalogEvent>().Apply(@event, new EventOptions { Store = true });
+
+			if (result.Success) _notificationManager.SendNotifications(Common.Core.Notifications.PRODUCT_MOVED_TO_CATALOG);
+
+			return result;
 		}
 
 		public void AddToWatchList(int id, int userId)

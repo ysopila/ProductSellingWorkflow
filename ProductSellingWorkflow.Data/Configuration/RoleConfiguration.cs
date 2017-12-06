@@ -12,6 +12,10 @@ namespace ProductSellingWorkflow.Data.Configuration
 			HasMany(x => x.Users)
 				.WithRequired(x => x.Role)
 				.HasForeignKey(x => x.RoleId);
+
+			HasMany(x => x.NotificationSettings)
+				.WithRequired(x => x.Role)
+				.HasForeignKey(x => x.RoleId);
 		}
 	}
 }

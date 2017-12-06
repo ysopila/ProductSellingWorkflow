@@ -28,6 +28,8 @@ namespace ProductSellingWorkflow.Data
 			modelBuilder.Configurations.Add(new UserConfiguration());
 			modelBuilder.Configurations.Add(new UserInRoleConfiguration());
 			modelBuilder.Configurations.Add(new WatchListConfiguration());
+			modelBuilder.Configurations.Add(new NotificationTypeConfiguration());
+			modelBuilder.Configurations.Add(new UserNotificationSettingsConfiguration());
 		}
 	}
 

@@ -44,7 +44,7 @@
             {
                 <label class="control-label">@Html.CheckBoxFor(x => Model.AllRoles[i].Selected) <span>@Model.AllRoles[i].Name</span></label><br />
                 @Html.HiddenFor(x => Model.AllRoles[i].Name)
-}
+            }
             <p><em><small>@Html.ValidationMessageFor(x => x.AllRoles, String.Empty, new { @class = "text-danger" })</small></em></p>
         </div>
     </div>

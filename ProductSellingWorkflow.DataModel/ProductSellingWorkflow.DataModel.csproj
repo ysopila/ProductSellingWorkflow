@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserNotificationSettings.cs" />
     <Compile Include="ProductLog.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductTag.cs" />
+    <Compile Include="NotificationType.cs" />
     <Compile Include="WatchList.cs" />
     <Compile Include="UserInRole.cs" />
     <Compile Include="Tag.cs" />

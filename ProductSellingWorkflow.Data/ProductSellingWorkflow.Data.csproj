@@ -50,8 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ProductLogConfiguration.cs" />
+    <Compile Include="Configuration\NotificationTypeConfiguration.cs" />
     <Compile Include="Configuration\RoleConfiguration.cs" />
     <Compile Include="Configuration\UserConfiguration.cs" />
+    <Compile Include="Configuration\UserNotificationSettingsConfiguration.cs" />
     <Compile Include="Configuration\WatchListConfiguration.cs" />
     <Compile Include="Configuration\UserInRoleConfiguration.cs" />
     <Compile Include="Configuration\TagConfiguration.cs" />
@@ -83,6 +85,10 @@
     <Compile Include="Migrations\201711231554156_AddWatchList.Designer.cs">
       <DependentUpon>201711231554156_AddWatchList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711271427179_AddNotifications.cs" />
+    <Compile Include="Migrations\201711271427179_AddNotifications.Designer.cs">
+      <DependentUpon>201711271427179_AddNotifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +97,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProductSellingWorkflow.Common\ProductSellingWorkflow.Common.csproj">
+      <Project>{f37e962f-2eb4-47c4-9044-ef720fcc8e66}</Project>
+      <Name>ProductSellingWorkflow.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProductSellingWorkflow.DataModel\ProductSellingWorkflow.DataModel.csproj">
       <Project>{B1C507A3-A578-45F6-BE91-E7F3524D952C}</Project>
       <Name>ProductSellingWorkflow.DataModel</Name>
@@ -114,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711231554156_AddWatchList.resx">
       <DependentUpon>201711231554156_AddWatchList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711271427179_AddNotifications.resx">
+      <DependentUpon>201711271427179_AddNotifications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

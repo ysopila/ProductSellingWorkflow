@@ -10,6 +10,7 @@ namespace ProductSellingWorkflow.DataModel
 			Products = new List<Product>();
 			WatchList = new List<WatchList>();
 			ProductLogs = new List<ProductLog>();
+			NotificationSettings = new List<UserNotificationSettings>();
 		}
 
 		public int Id { get; set; }
@@ -21,6 +22,7 @@ namespace ProductSellingWorkflow.DataModel
 		public ICollection<Product> Products { get; set; }
 		public ICollection<ProductLog> ProductLogs { get; set; }
 		public ICollection<WatchList> WatchList { get; set; }
+		public ICollection<UserNotificationSettings> NotificationSettings { get; set; }
 
 	}
 }

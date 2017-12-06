@@ -16,6 +16,8 @@ namespace ProductSellingWorkflow.Repository.Implementations
 		private IRepository<Tag> _tagRepository;
 		private IUserRepository _userRepository;
 		private IRepository<Role> _roleRepository;
+		private IRepository<NotificationType> _notificationTypeRepository;
+		private IUserNotificationSettingsRepository _userNotificationSettingsRepository;
 		private IWatchListRepository _watchListRepository;
 
 		private IDbContext Context
@@ -31,6 +33,16 @@ namespace ProductSellingWorkflow.Repository.Implementations
 		public IRepository<ProductLog> ProductLogRepository
 		{
 			get { return _productLogRepository ?? (_productLogRepository = new Repository<ProductLog>(Context)); }
+		}
+
+		public IRepository<NotificationType> NotificationTypeRepository
+		{
+			get { return _notificationTypeRepository ?? (_notificationTypeRepository = new Repository<NotificationType>(Context)); }
+		}
+
+		public IUserNotificationSettingsRepository UserNotificationSettingsRepository
+		{
+			get { return _userNotificationSettingsRepository ?? (_userNotificationSettingsRepository = new UserNotificationSettingsRepository(Context)); }
 		}
 
 		public IRepository<ProductTag> ProductTagRepository

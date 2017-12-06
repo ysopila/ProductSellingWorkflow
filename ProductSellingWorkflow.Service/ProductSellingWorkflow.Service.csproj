@@ -82,6 +82,20 @@
     <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\TagDTO.cs" />
+    <Compile Include="NotificationHandlers\INotificationManager.cs" />
+    <Compile Include="NotificationHandlers\NotificationHandlerBase.cs" />
+    <Compile Include="NotificationHandlers\INotificationFactory.cs" />
+    <Compile Include="NotificationHandlers\INotificationHandler.cs" />
+    <Compile Include="NotificationHandlers\NotificationHandler.cs" />
+    <Compile Include="NotificationHandlers\NotificationManager.cs" />
+    <Compile Include="Notifications\IPushNotification.cs" />
+    <Compile Include="Notifications\IWebNotification.cs" />
+    <Compile Include="Notifications\IEmailNotification.cs" />
+    <Compile Include="Notifications\INotification.cs" />
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\EmailNotification.cs" />
+    <Compile Include="Notifications\WebNotification.cs" />
+    <Compile Include="Notifications\PushNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

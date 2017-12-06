@@ -24,7 +24,7 @@
                 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <p class="navbar-text">Signed in as <a href="#" class="navbar-link">@User.Identity.Name</a></p>
+                    <p class="navbar-text">Signed in as <a href="@Url.Action("Settings", "Account")" class="navbar-link">@User.Identity.Name</a></p>
                     @Html.ActionLink("Log out", "Logout", "Account", null, new { @class = "btn btn-warning navbar-btn pull-right" })
                 }
                 else
@@ -45,6 +45,24 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/signalr/js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.connection.hub.start().done(function () {
+                var notificationHub = $.connection.NotificationHub;
+
+                notificationHub.invoke('Subscribe', '@User.Identity.Name');
+                notificationHub.on('notify', function (content) {
+                    $.bootstrapGrowl(content, {
+                        type: 'success',
+                        delay: 20000,
+                    });
+                });
+            });
+           
+        });
+    </script>
 
 </body>
 </html>

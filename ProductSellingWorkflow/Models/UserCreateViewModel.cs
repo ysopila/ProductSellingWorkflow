@@ -11,8 +11,8 @@ namespace ProductSellingWorkflow.Models
 			AllRoles = new List<SelectedRole>
 			{
 				new SelectedRole { Name = Roles.Admin },
-				new SelectedRole { Name = Roles.Buyer },
-				new SelectedRole { Name = Roles.Seller }
+				new SelectedRole { Name = Roles.Seller },
+				new SelectedRole { Name = Roles.Buyer }
 			};
 		}
 

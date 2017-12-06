@@ -1,0 +1,38 @@
+﻿@using ProductSellingWorkflow.Models
+@using ProductSellingWorkflow.Common.Enums
+@model NotificationSettingsViewModel
+
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Settings</h2>
+
+<br />
+@using (Html.BeginForm("Settings", "Account", null, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    for (int i = 0; i < Model.NotificationTypes.Count; i++)
+    {
+        @Html.HiddenFor(x => Model.NotificationTypes[i].NotificationType.Id)
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">@Model.NotificationTypes[i].NotificationType.Name</label>
+            <div class="col-sm-8">
+                <div class="checkbox text-info">
+                    <input type="checkbox" @(Model.NotificationTypes[i].CurrentKind.HasFlag(NotificationKind.Email) ? "checked" : "") name="@Html.NameFor(x => x.NotificationTypes[i].SelectedKinds)" value="@NotificationKind.Email" /><span>Email</span><br />
+                    <input type="checkbox" @(Model.NotificationTypes[i].CurrentKind.HasFlag(NotificationKind.Web) ? "checked" : "") name="@Html.NameFor(x => x.NotificationTypes[i].SelectedKinds)" value="@NotificationKind.Web" /><span>Web</span><br />
+                    <input type="checkbox" @(Model.NotificationTypes[i].CurrentKind.HasFlag(NotificationKind.PushNotification) ? "checked" : "") name="@Html.NameFor(x => x.NotificationTypes[i].SelectedKinds)" value="@NotificationKind.PushNotification"/><span>Push Notification</span><br />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+    </div>
+}

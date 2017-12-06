@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using ProductSellingWorkflow.Common.Core;
 using ProductSellingWorkflow.Controllers;
+using ProductSellingWorkflow.NotificationHandlers;
 using ProductSellingWorkflow.Repository.Abstractions;
 using ProductSellingWorkflow.Repository.Implementations;
 using ProductSellingWorkflow.Service;
@@ -9,6 +10,7 @@ using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.EventHandlers.Product;
 using ProductSellingWorkflow.Service.Implementations;
 using ProductSellingWorkflow.Service.Mappings;
+using ProductSellingWorkflow.Service.NotificationHandlers;
 using System;
 using System.Reflection;
 using System.Web.Mvc;
@@ -35,6 +37,8 @@ namespace ProductSellingWorkflow
 			builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
 			builder.RegisterType<TagService>().As<ITagService>().InstancePerLifetimeScope();
 			builder.RegisterType<ProductEventFactory>().As<IProductEventFactory>().InstancePerLifetimeScope();
+			builder.RegisterType<NotificationFactory>().As<INotificationFactory>().InstancePerLifetimeScope();
+			builder.RegisterType<NotificationManager>().As<INotificationManager>().InstancePerLifetimeScope();
 
 			builder.RegisterType<Mapper>().As<ISimpleMapper>().InstancePerLifetimeScope();
 
