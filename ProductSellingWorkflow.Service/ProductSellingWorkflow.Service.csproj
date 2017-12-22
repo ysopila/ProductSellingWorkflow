@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\IAuthenticationService.cs" />
+    <Compile Include="Abstractions\INotificationService.cs" />
     <Compile Include="Abstractions\ITagService.cs" />
     <Compile Include="Abstractions\IProductService.cs" />
     <Compile Include="Abstractions\IRoleService.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Events\PropertyChangeEvent.cs" />
     <Compile Include="Events\Product\Properties\ProductStateChange.cs" />
     <Compile Include="Events\Product\UpdateProductEvent.cs" />
+    <Compile Include="Implementations\NotificationService.cs" />
     <Compile Include="Implementations\TagService.cs" />
     <Compile Include="Implementations\ProductService.cs" />
     <Compile Include="Implementations\UserService.cs" />
@@ -92,7 +94,7 @@
     <Compile Include="Notifications\IWebNotification.cs" />
     <Compile Include="Notifications\IEmailNotification.cs" />
     <Compile Include="Notifications\INotification.cs" />
-    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\NotificationBase.cs" />
     <Compile Include="Notifications\EmailNotification.cs" />
     <Compile Include="Notifications\WebNotification.cs" />
     <Compile Include="Notifications\PushNotification.cs" />

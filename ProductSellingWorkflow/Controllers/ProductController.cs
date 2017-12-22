@@ -3,7 +3,6 @@ using ProductSellingWorkflow.Models;
 using ProductSellingWorkflow.Service.Abstractions;
 using ProductSellingWorkflow.Service.Events;
 using ProductSellingWorkflow.Service.Events.Product;
-using ProductSellingWorkflow.Service.NotificationHandlers;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -15,7 +14,6 @@ namespace ProductSellingWorkflow.Controllers
 		private readonly IUserService _userService;
 		private readonly IAuthenticationService _authService;
 		private readonly ITagService _serviceTags;
-		private readonly INotificationManager _notificationManager;
 
 		public ProductController(IProductService service, ITagService serviceTags, IAuthenticationService authService, IUserService userService)
 		{

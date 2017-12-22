@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
+using ProductSellingWorkflow.NotificationHandlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -14,6 +16,8 @@ namespace ProductSellingWorkflow
 	public class MvcApplication : System.Web.HttpApplication
 	{
 		private static AutofacResolver resolver;
+		private NotificationJob _notificationJob;
+
 		protected void Application_Start()
 		{
 
@@ -23,6 +27,15 @@ namespace ProductSellingWorkflow
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+			_notificationJob = new NotificationJob(resolver.Container);
+
+			Task.Factory.StartNew(() => _notificationJob.Start());
+		}
+
+		protected void Application_End()
+		{
+			_notificationJob?.Stop();
 		}
 
 		protected void Application_AuthenticateRequest(object sender, EventArgs e)

@@ -7,8 +7,10 @@ namespace ProductSellingWorkflow.Service.NotificationHandlers
 		void Send(T notification);
 	}
 
-	public interface INotificationManager : INotificationManager<IWebNotification>, INotificationManager<IEmailNotification>, INotificationManager<IPushNotification>
+	public interface INotificationManager :
+		INotificationManager<IWebNotification>,
+		INotificationManager<IEmailNotification>,
+		INotificationManager<IPushNotification>
 	{
-		void SendNotifications(string type);
 	}
 }

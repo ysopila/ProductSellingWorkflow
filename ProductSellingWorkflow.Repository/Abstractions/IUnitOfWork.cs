@@ -18,5 +18,6 @@ namespace ProductSellingWorkflow.Repository.Abstractions
 		IRepository<Role> RoleRepository { get; }
 		IRepository<NotificationType> NotificationTypeRepository { get; }
 		IUserNotificationSettingsRepository UserNotificationSettingsRepository { get; }
+		IRepository<UserNotification> UserNotificationRepository { get; }
 	}
 }

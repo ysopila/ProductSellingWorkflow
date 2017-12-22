@@ -7,6 +7,7 @@ namespace ProductSellingWorkflow.DataModel
 		public NotificationType()
 		{
 			NotificationSettings = new List<UserNotificationSettings>();
+			Notifications = new List<Notification>();
 		}
 
 		public int Id { get; set; }
@@ -14,5 +15,6 @@ namespace ProductSellingWorkflow.DataModel
 		public string Caption { get; set; }
 
 		public ICollection<UserNotificationSettings> NotificationSettings { get; set; }
+		public ICollection<Notification> Notifications { get; set; }
 	}
 }

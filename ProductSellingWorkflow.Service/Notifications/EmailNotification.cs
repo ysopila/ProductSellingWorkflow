@@ -1,6 +1,6 @@
 ﻿namespace ProductSellingWorkflow.Service.Notifications
 {
-	public class EmailNotification : Notification, IEmailNotification
+	public class EmailNotification : NotificationBase, IEmailNotification
 	{
 		public string From { get; set; }
 		public string To { get; set; }

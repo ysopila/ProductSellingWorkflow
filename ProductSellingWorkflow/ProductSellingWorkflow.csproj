@@ -200,6 +200,7 @@
     <Compile Include="Models\ProductCreateViewModel.cs" />
     <Compile Include="NotificationHandlers\EmailNotificationHandler.cs" />
     <Compile Include="NotificationHandlers\NotificationFactory.cs" />
+    <Compile Include="NotificationHandlers\NotificationJob.cs" />
     <Compile Include="NotificationHandlers\PushNotificationHandler.cs" />
     <Compile Include="NotificationHandlers\WebNotificationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

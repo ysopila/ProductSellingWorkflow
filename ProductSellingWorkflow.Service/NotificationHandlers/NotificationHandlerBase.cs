@@ -2,7 +2,7 @@
 
 namespace ProductSellingWorkflow.Service.NotificationHandlers
 {
-	public abstract class NotificationHandlerBase<T> : NotificationHandler where T : Notification
+	public abstract class NotificationHandlerBase<T> : NotificationHandler where T : NotificationBase
 	{
 		public virtual void Handle(T notification)
 		{

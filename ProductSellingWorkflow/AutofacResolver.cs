@@ -34,6 +34,7 @@ namespace ProductSellingWorkflow
 			builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 			builder.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
 			builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
+			builder.RegisterType<NotificationService>().As<INotificationService>().InstancePerLifetimeScope();
 			builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
 			builder.RegisterType<TagService>().As<ITagService>().InstancePerLifetimeScope();
 			builder.RegisterType<ProductEventFactory>().As<IProductEventFactory>().InstancePerLifetimeScope();

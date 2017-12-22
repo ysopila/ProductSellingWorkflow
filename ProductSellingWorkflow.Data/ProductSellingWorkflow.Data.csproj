@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\UserNotificationConfiguration.cs" />
+    <Compile Include="Configuration\NotificationConfiguration.cs" />
     <Compile Include="Configuration\ProductLogConfiguration.cs" />
     <Compile Include="Configuration\NotificationTypeConfiguration.cs" />
     <Compile Include="Configuration\RoleConfiguration.cs" />
@@ -89,6 +91,10 @@
     <Compile Include="Migrations\201711271427179_AddNotifications.Designer.cs">
       <DependentUpon>201711271427179_AddNotifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712221438296_AddUserNotifications.cs" />
+    <Compile Include="Migrations\201712221438296_AddUserNotifications.Designer.cs">
+      <DependentUpon>201712221438296_AddUserNotifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711271427179_AddNotifications.resx">
       <DependentUpon>201711271427179_AddNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712221438296_AddUserNotifications.resx">
+      <DependentUpon>201712221438296_AddUserNotifications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
